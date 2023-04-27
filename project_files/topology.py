@@ -40,23 +40,16 @@ class NetworkSlicingTopo(Topo):
 
         # Add clients-router1 and clients-router2 links
         self.addLink("h1", "s1", **host_link_config)
-        self.addLink("h2", "s1", **host_link_config)
-        self.addLink("h3", "s6", **host_link_config)
+        self.addLink("h2", "s6", **host_link_config)
+        self.addLink("h3", "s1", **host_link_config)
         self.addLink("h4", "s6", **host_link_config)
-        self.addLink("h5", "s1", **host_link_config)
-        self.addLink("h6", "s1", **host_link_config)
-        self.addLink("h7", "s6", **host_link_config)
-        self.addLink("h8", "s6", **host_link_config)
+        self.addLink("h5", "s2", **host_link_config)
+        self.addLink("h6", "s2", **host_link_config)
+        self.addLink("h7", "s7", **host_link_config)
+        self.addLink("h8", "s7", **host_link_config)
         self.addLink("h9", "s2", **host_link_config)
-        self.addLink("h10", "s2", **host_link_config)
-        self.addLink("h11", "s2", **host_link_config)
-        self.addLink("h12", "s7", **host_link_config)
-        self.addLink("h13", "s7", **host_link_config)
-        self.addLink("h14", "s7", **host_link_config)
-        self.addLink("h15", "s2", **host_link_config)
-        self.addLink("h16", "s2", **host_link_config)
-        self.addLink("h17", "s7", **host_link_config)
-        self.addLink("h18", "s7", **host_link_config)
+        self.addLink("h10", "s7", **host_link_config)
+
 
 
 
