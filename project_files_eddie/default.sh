@@ -23,7 +23,7 @@ sudo ovs-vsctl set port s6-eth2 qos=@newqos -- \
 
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=1000 \
-queues:24=@1q queues:43=@2q -- \
+queues:21=@1q queues:43=@2q -- \
 --id=@1q create queue other-config:min-rate=100 other-config:max-rate=500 -- \
 --id=@2q create queue other-config:min-rate=100 other-config:max-rate=500
 
@@ -51,7 +51,7 @@ sudo ovs-vsctl set port s7-eth2 qos=@newqos -- \
 
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=1000 \
-queues:65=@1q queues:87=@2q -- \
+queues:65=@3q queues:87=@4q -- \
 --id=@3q create queue other-config:min-rate=100 other-config:max-rate=500 -- \
 --id=@4q create queue other-config:min-rate=100 other-config:max-rate=500
 
