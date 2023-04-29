@@ -9,10 +9,7 @@ import subprocess
 
 
 class NetworkSlicingTopo(Topo):
-    def __init__(self):
-
-        Topo.__init__(self)
-
+    def build(self):
 
         host_config = dict(inNamespace=True)
         link_config = dict()
@@ -64,7 +61,7 @@ if __name__ == "__main__":
         # We specify an external controller by passing the Controller object in the Mininet constructor
         # This was added in Mininet 2.2.0 and above.
         # SOS Note: Do not specify port -- Default: 6653
-        controller=RemoteController( 'c0', ip='127.0.0.1'), 
+
         switch=OVSKernelSwitch,
         build=False,
         autoSetMacs=True,
@@ -72,6 +69,8 @@ if __name__ == "__main__":
         link=TCLink,
     )
     
+    controller=RemoteController( 'c0', ip='127.0.0.1', port=6653), 
+    net.addController(controller)
     # ------------ Check Constructor for Controller ----------------- #
     #controller = RemoteController("c1", ip="127.0.0.1", port=6633)
     #net.addController(controller)
@@ -81,7 +80,7 @@ if __name__ == "__main__":
     
     # Here we automate the process of creating the 2 slices by calling as a subprocess the common_scenario.sh
     # Assumption: We begin with a non-emergency scenario.
-    subprocess.call("./common_scenario.sh")
+    subprocess.call("./default.sh")
     
     CLI(net)
     net.stop()

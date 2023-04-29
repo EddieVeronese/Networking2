@@ -6,6 +6,13 @@ from ryu.ofproto import ofproto_v1_3
 from ryu.lib.packet import packet
 from ryu.lib.packet import ethernet
 from ryu.lib.packet import ether_types
+from ryu.lib.packet import udp
+from ryu.lib.packet import tcp
+from ryu.lib.packet import icmp
+import subprocess
+import threading
+import time
+
 
 class TrafficSlicing(app_manager.RyuApp):
 
@@ -106,18 +113,10 @@ class TrafficSlicing(app_manager.RyuApp):
     # This function adds a new flow entry to a switch using Openflow protocol
     def add_flow(self, datapath, priority, match, actions):
 
-        # datapath is used to have a reference to the switch which wants to add a new flow entry to its flow table
-        # priority defines the priority of the new flow entry. A higher priority indicates that the flow entry should be matched before lower priority entries in the flow table
-        # math specifies the conditions under which the flow entry should be applied
-        # actions specifies a list of actions to be executed if the flow entry is matched
+        ofproto = datapath.ofproto
 
-        # Extract OpenFlow version supported by the switch
-        ofproto = datapath.ofproto #ryu.ofproto.ofproto_v1_3.OFP_VERSION
+        parser = datapath.ofproto_parser
 
-        # Extract the parser based on OpenFlow version
-        parser = datapath.ofproto_parser #ryu.ofproto.ofproto_v1_3_parser
-
-        # Create a new OpenFlow OFPFlowMode message
         mod = parser.OFPFlowMod(
             datapath = datapath, # It's a reference to the switch
             priority = priority, # Priority of the new flow entry
@@ -125,7 +124,6 @@ class TrafficSlicing(app_manager.RyuApp):
             instructions = [parser.OFPInstructionActions(ofproto.OFPIT_APPLY_ACTIONS, actions)] # Specifies a list of instructions to be executed if the flow entry is matched
         )
 
-        # Sends the OFPFlowMod message to the switch
         datapath.send_msg(mod)
 
     # Send a packet to a switch and specify which is the output port
