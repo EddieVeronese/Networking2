@@ -66,8 +66,8 @@ if __name__ == "__main__":
     net.build()
     net.start()
 
-    subprocess.call("./prova.sh")
-    time.sleep(30)
+    #subprocess.call("./prova.sh")
+    #time.sleep(30)
     subprocess.call("./default.sh")
 
     

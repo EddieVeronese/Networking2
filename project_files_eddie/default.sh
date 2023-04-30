@@ -16,10 +16,9 @@ echo ' '
 
 # cre odue queue in switch 6 per h2 e h4
 printf "Switch 6:\n"
-
-sudo ovs-vsctl set port s6-eth1 qos=@newqos -- \
-sudo ovs-vsctl set port s6-eth2 qos=@newqos -- \
-
+sudo ovs-vsctl -- \
+set port s6-eth1 qos=@newqos -- \
+set port s6-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=1000 \
 queues:21=@1q queues:43=@2q -- \
@@ -30,10 +29,9 @@ echo ' '
 
 # cre odue queue in switch 2 per h5 e h7
 printf "Switch 2:\n"
-
-sudo ovs-vsctl set port s2-eth1 qos=@newqos -- \
-sudo ovs-vsctl set port s2-eth2 qos=@newqos -- \
-
+sudo ovs-vsctl -- \
+set port s2-eth1 qos=@newqos -- \
+set port s2-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=1000 \
 queues:56=@3q queues:78=@4q -- \
@@ -44,10 +42,9 @@ echo ' '
 
 # cre odue queue in switch 7 per h6 e h8
 printf "Switch 7:\n"
-
-sudo ovs-vsctl set port s7-eth1 qos=@newqos -- \
-sudo ovs-vsctl set port s7-eth2 qos=@newqos -- \
-
+sudo ovs-vsctl -- \
+set port s7-eth1 qos=@newqos -- \
+set port s7-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=1000 \
 queues:65=@3q queues:87=@4q -- \
@@ -56,10 +53,9 @@ queues:65=@3q queues:87=@4q -- \
 
 # cre odue queue in switch 3 per h1
 printf "Switch 3:\n"
-
-sudo ovs-vsctl set port s3-eth1 qos=@newqos -- \
-sudo ovs-vsctl set port s3-eth2 qos=@newqos -- \
-
+sudo ovs-vsctl -- \
+set port s3-eth1 qos=@newqos -- \
+set port s3-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=1000 \
 queues:12=@1q -- \
@@ -69,10 +65,9 @@ echo ' '
 
 # cre odue queue in switch 4 per h1
 printf "Switch 4:\n"
-
-sudo ovs-vsctl set port s4-eth1 qos=@newqos -- \
-sudo ovs-vsctl set port s4-eth2 qos=@newqos -- \
-
+sudo ovs-vsctl -- \
+set port s4-eth1 qos=@newqos -- \
+set port s4-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=1000 \
 queues:34=@2q queues:56=@3q -- \
@@ -83,10 +78,9 @@ echo ' '
 
 # cre odue queue in switch 5 per h1
 printf "Switch 5:\n"
-
-sudo ovs-vsctl set port s5-eth1 qos=@newqos -- \
-sudo ovs-vsctl set port s5-eth2 qos=@newqos -- \
-
+sudo ovs-vsctl -- \
+set port s5-eth1 qos=@newqos -- \
+set port s5-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=1000 \
 queues:78=@4q -- \
