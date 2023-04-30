@@ -5,6 +5,7 @@
 printf "Switch 1:\n"
 sudo ovs-vsctl -- \
 set port s1-eth1 qos=@newqos -- \
+set port s1-eth4 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=1000 \
 queues:12=@1q queues:34=@2q -- \
@@ -17,6 +18,7 @@ echo ' '
 printf "Switch 2:\n"
 sudo ovs-vsctl -- \
 set port s2-eth1 qos=@newqos -- \
+set port s2-eth4 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=1000 \
 queues:12=@1q queues:34=@2q -- \
@@ -26,12 +28,23 @@ queues:12=@1q queues:34=@2q -- \
 # cre odue queue in switch 3
 printf "Switch 3:\n"
 sudo ovs-vsctl -- \
-set port s1-eth1 qos=@newqos -- \
-set port s1-eth2 qos=@newqos -- \
+set port s3-eth1 qos=@newqos -- \
+set port s3-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=1000 \
-queues:12=@1q queues:34=@2q -- \
---id=@1q create queue other-config:min-rate=100 other-config:max-rate=500 -- \
+queues:12=@1q -- \
+--id=@1q create queue other-config:min-rate=100 other-config:max-rate=500
+
+echo ' '
+
+# cre odue queue in switch 4
+printf "Switch 3:\n"
+sudo ovs-vsctl -- \
+set port s4-eth1 qos=@newqos -- \
+set port s4-eth2 qos=@newqos -- \
+--id=@newqos create QoS type=linux-htb \
+other-config:max-rate=1000 \
+queues:34=@2q -- \
 --id=@2q create queue other-config:min-rate=100 other-config:max-rate=500
 
 echo ' '
@@ -48,8 +61,10 @@ sudo ovs-ofctl add-flow s2 ip,priority=65500,nw_src=10.0.0.2,nw_dst=10.0.0.1,idl
 sudo ovs-ofctl add-flow s2 ip,priority=65500,nw_src=10.0.0.4,nw_dst=10.0.0.3,idle_timeout=0,actions=set_queue:34,normal
 
 sudo ovs-ofctl add-flow s3 ip,priority=65500,nw_src=10.0.0.1,nw_dst=10.0.0.2,idle_timeout=0,actions=set_queue:12,normal
-sudo ovs-ofctl add-flow s3 ip,priority=65500,nw_src=10.0.0.3,nw_dst=10.0.0.4,idle_timeout=0,actions=set_queue:34,normal
 sudo ovs-ofctl add-flow s3 ip,priority=65500,nw_src=10.0.0.2,nw_dst=10.0.0.1,idle_timeout=0,actions=set_queue:12,normal
-sudo ovs-ofctl add-flow s3 ip,priority=65500,nw_src=10.0.0.4,nw_dst=10.0.0.3,idle_timeout=0,actions=set_queue:34,normal
+
+sudo ovs-ofctl add-flow s4 ip,priority=65500,nw_src=10.0.0.3,nw_dst=10.0.0.4,idle_timeout=0,actions=set_queue:12,normal
+sudo ovs-ofctl add-flow s4 ip,priority=65500,nw_src=10.0.0.4,nw_dst=10.0.0.3,idle_timeout=0,actions=set_queue:12,normal
+
 
 
