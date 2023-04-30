@@ -17,7 +17,7 @@ class NetworkSlicingTopo(Topo):
         host_link_config = dict()
 
         #creo 7 switch
-        for i in range(2):
+        for i in range(3):
             sconfig = {"dpid": "%016x" % (i + 1)}
             self.addSwitch("s%d" % (i + 1), **sconfig)
 
@@ -27,7 +27,8 @@ class NetworkSlicingTopo(Topo):
             
  
         # linko gli switch
-        self.addLink("s1", "s2", **link_config)
+        self.addLink("s1", "s3", **link_config)
+        self.addLink("s2", "s3", **link_config)
 
         # Add clients-router1 and clients-router2 links
         self.addLink("h1", "s1", **host_link_config)
