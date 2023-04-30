@@ -67,7 +67,8 @@ if __name__ == "__main__":
     net.start()
 
     subprocess.call("./prova.sh")
-    time.sleep(60)
+    time.sleep(30)
+    subprocess.call("./default.sh")
 
     
     CLI(net)
