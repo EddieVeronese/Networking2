@@ -83,6 +83,17 @@ class TrafficSlicing(app_manager.RyuApp):
             },  
         }
 
+        self.port_to_port = {
+            1: {4:1, 3:2},
+            2: {4:1, 3:1},
+	        3: {1:2},
+            4: {1:2, 4:3},
+            5: {1:2},
+            6: {4:1, 3:2},
+            7: {4:1, 3:2},
+        }
+        
+
     @set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
     def switch_features_handler(self, ev): 
         
