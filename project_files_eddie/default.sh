@@ -3,10 +3,9 @@
 
 # cre odue queue in switch 1 per h1 e h3
 printf "Switch 1:\n"
-
-sudo ovs-vsctl set port s1-eth1 qos=@newqos -- \
-sudo ovs-vsctl set port s1-eth2 qos=@newqos -- \
-
+sudo ovs-vsctl -- \
+set port s1-eth1 qos=@newqos -- \
+set port s1-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=1000 \
 queues:12=@1q queues:34=@2q -- \
