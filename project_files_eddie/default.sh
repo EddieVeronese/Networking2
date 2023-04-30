@@ -1,3 +1,5 @@
+#!/bin/sh
+
 sudo ovs-vsctl set port s1-eth1 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=10000000 \
