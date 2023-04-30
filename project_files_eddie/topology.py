@@ -6,6 +6,7 @@ from mininet.node import OVSKernelSwitch, RemoteController
 from mininet.cli import CLI
 from mininet.link import TCLink
 import subprocess
+import time
 
 
 class NetworkSlicingTopo(Topo):
@@ -66,6 +67,8 @@ if __name__ == "__main__":
     net.start()
 
     subprocess.call("./prova.sh")
+    time.sleep(60)
+
     
     CLI(net)
     net.stop()
