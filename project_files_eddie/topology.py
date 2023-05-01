@@ -22,21 +22,23 @@ class NetworkSlicingTopo(Topo):
             self.addSwitch("s%d" % (i + 1), **sconfig)
 
         #creo 8 host
-        for i in range(4):
+        for i in range(8):
             self.addHost("h%d" % (i + 1), **host_config) 
             
  
-        # linko gli switch
-        self.addLink("s1", "s3", **link_config)
-        self.addLink("s1", "s4", **link_config)
-        self.addLink("s2", "s3", **link_config)
-        self.addLink("s2", "s4", **link_config)
+        self.addLink('s1', 's2')
+        self.addLink('s1', 's3')
+        self.addLink('s2', 's4')
+        self.addLink('s3', 's4')
 
-        # Add clients-router1 and clients-router2 links
-        self.addLink("h1", "s1", **host_link_config)
-        self.addLink("h2", "s1", **host_link_config)
-        self.addLink("h3", "s2", **host_link_config)
-        self.addLink("h4", "s2", **host_link_config)
+        self.addLink('h1', 's1')
+        self.addLink('h2', 's4')
+        self.addLink('h3', 's1')
+        self.addLink('h4', 's4')
+        self.addLink('h5', 's1')
+        self.addLink('h6', 's4')
+        self.addLink('h7', 's1')
+        self.addLink('h8', 's4')
 
 
 topos = {"networkslicingtopo": (lambda: NetworkSlicingTopo())}
