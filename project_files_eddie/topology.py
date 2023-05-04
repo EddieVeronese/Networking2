@@ -27,22 +27,23 @@ class NetworkSlicingTopo(Topo):
             
  
         self.addLink('s1', 's3')
-        self.addLink('s1', 's4')
-        self.addLink('s2', 's4')
-        self.addLink('s2', 's5')
+        self.addLink('s1', 's4')      
         self.addLink('s3', 's6')
         self.addLink('s4', 's6')
         self.addLink('s4', 's7')
+        self.addLink('s2', 's4')
+        self.addLink('s2', 's5')
         self.addLink('s5', 's7')
 
-        self.addLink('h1', 's1')
-        self.addLink('h2', 's6')
         self.addLink('h3', 's1')
+        self.addLink('h1', 's1')
         self.addLink('h4', 's6')
-        self.addLink('h5', 's2')
-        self.addLink('h6', 's7')
+        self.addLink('h2', 's6')
         self.addLink('h7', 's2')
+        self.addLink('h5', 's2')
         self.addLink('h8', 's7')
+        self.addLink('h6', 's7')
+        
 
 
 topos = {"networkslicingtopo": (lambda: NetworkSlicingTopo())}
