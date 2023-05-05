@@ -45,9 +45,9 @@ class NetworkSlicingTopo(Topo):
         self.addLink('h6', 's7')
         #host per scenario 2
         self.addLink('h9', 's1')
-        self.addLink('h10', 's2')
+        self.addLink('h10', 's6')
         self.addLink('h11', 's1')
-        self.addLink('h12', 's2')
+        self.addLink('h12', 's6')
         
 
 
