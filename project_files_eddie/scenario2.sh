@@ -97,10 +97,10 @@ sudo ovs-ofctl add-flow s1 ip,priority=65500,nw_src=10.0.0.3,idle_timeout=0,acti
 sudo ovs-ofctl add-flow s1 ip,priority=65500,nw_src=10.0.0.4,idle_timeout=0,actions=set_queue:34,output:3
 
 sudo ovs-ofctl add-flow s1 ip,priority=65500,nw_src=10.0.0.9,idle_timeout=0,actions=set_queue:9a,output:1
-sudo ovs-ofctl add-flow s1 ip,priority=65500,nw_src=10.0.0.a,idle_timeout=0,actions=set_queue:9a,output:5
+sudo ovs-ofctl add-flow s1 ip,priority=65500,nw_src=10.0.0.10,idle_timeout=0,actions=set_queue:9a,output:5
 
-sudo ovs-ofctl add-flow s1 ip,priority=65500,nw_src=10.0.0.b,idle_timeout=0,actions=set_queue:bc,output:2
-sudo ovs-ofctl add-flow s1 ip,priority=65500,nw_src=10.0.0.c,idle_timeout=0,actions=set_queue:bc,output:6
+sudo ovs-ofctl add-flow s1 ip,priority=65500,nw_src=10.0.0.1,idle_timeout=0,actions=set_queue:bc,output:2
+sudo ovs-ofctl add-flow s1 ip,priority=65500,nw_src=10.0.0.12,idle_timeout=0,actions=set_queue:bc,output:6
 
 # Switch 2 =
 sudo ovs-ofctl add-flow s2 ip,priority=65500,nw_src=10.0.0.5,idle_timeout=0,actions=set_queue:56,output:1
@@ -114,14 +114,14 @@ sudo ovs-ofctl add-flow s3 ip,priority=65500,nw_src=10.0.0.1,idle_timeout=0,acti
 sudo ovs-ofctl add-flow s3 ip,priority=65500,nw_src=10.0.0.2,idle_timeout=0,actions=set_queue:12,output:1
 
 sudo ovs-ofctl add-flow s3 ip,priority=65500,nw_src=10.0.0.9,idle_timeout=0,actions=set_queue:9a,output:2
-sudo ovs-ofctl add-flow s3 ip,priority=65500,nw_src=10.0.0.a,idle_timeout=0,actions=set_queue:9a,output:1
+sudo ovs-ofctl add-flow s3 ip,priority=65500,nw_src=10.0.0.10,idle_timeout=0,actions=set_queue:9a,output:1
 
 #Switch 4 ok
 sudo ovs-ofctl add-flow s4 ip,priority=65500,nw_src=10.0.0.3,idle_timeout=0,actions=set_queue:34,output:2
 sudo ovs-ofctl add-flow s4 ip,priority=65500,nw_src=10.0.0.4,idle_timeout=0,actions=set_queue:34,output:1
 
-sudo ovs-ofctl add-flow s4 ip,priority=65500,nw_src=10.0.0.b,idle_timeout=0,actions=set_queue:bc,output:2
-sudo ovs-ofctl add-flow s4 ip,priority=65500,nw_src=10.0.0.c,idle_timeout=0,actions=set_queue:bc,output:1
+sudo ovs-ofctl add-flow s4 ip,priority=65500,nw_src=10.0.0.11,idle_timeout=0,actions=set_queue:bc,output:2
+sudo ovs-ofctl add-flow s4 ip,priority=65500,nw_src=10.0.0.12,idle_timeout=0,actions=set_queue:bc,output:1
 
 sudo ovs-ofctl add-flow s4 ip,priority=65500,nw_src=10.0.0.5,idle_timeout=0,actions=set_queue:56,output:3
 sudo ovs-ofctl add-flow s4 ip,priority=65500,nw_src=10.0.0.6,idle_timeout=0,actions=set_queue:56,output:4
@@ -133,11 +133,11 @@ sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.1,idle_timeout=0,acti
 sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.4,idle_timeout=0,actions=set_queue:34,output:2
 sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.3,idle_timeout=0,actions=set_queue:34,output:3
 
-sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.a,idle_timeout=0,actions=set_queue:9a,output:1
+sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.10,idle_timeout=0,actions=set_queue:9a,output:1
 sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.9,idle_timeout=0,actions=set_queue:9a,output:5
 
-sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.c,idle_timeout=0,actions=set_queue:bc,output:2
-sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.b,idle_timeout=0,actions=set_queue:bc,output:6
+sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.12,idle_timeout=0,actions=set_queue:bc,output:2
+sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.11,idle_timeout=0,actions=set_queue:bc,output:6
 
 
 # Switch 5 =

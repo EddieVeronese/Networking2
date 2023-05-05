@@ -22,7 +22,7 @@ class NetworkSlicingTopo(Topo):
             self.addSwitch("s%d" % (i + 1), **sconfig)
 
         #creo 8 host
-        for i in range(8):
+        for i in range(12):
             self.addHost("h%d" % (i + 1), **host_config) 
             
  
