@@ -12,7 +12,6 @@ from ryu.lib.packet import icmp
 import subprocess
 import threading
 import time
-import keyboard
 
 class TrafficSlicing(app_manager.RyuApp):
 
@@ -72,8 +71,6 @@ class TrafficSlicing(app_manager.RyuApp):
                 "00:00:00:00:00:08": 3,
             }
         }    
-
-        keyboard.add_hotkey('c', self.call_scenario1)   
 
     @set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
     def switch_features_handler(self, ev): 
@@ -154,6 +151,3 @@ class TrafficSlicing(app_manager.RyuApp):
 
             self._send_package(msg, datapath, in_port, actions)
     
-    def call_scenario1(self):
-
-         subprocess.call("./scenario1.sh")
