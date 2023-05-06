@@ -123,7 +123,6 @@ sudo ovs-ofctl add-flow s6 ip,priority=65500,in_port=4,idle_timeout=0,actions=se
 sudo ovs-ofctl add-flow s6 ip,priority=65500,in_port=2,idle_timeout=0,actions=set_queue:34,output:3
 sudo ovs-ofctl add-flow s6 ip,priority=65500,in_port=3,idle_timeout=0,actions=set_queue:34,output:2
 
-
 sudo ovs-ofctl add-flow s6 ip,priority=65500,in_port=5,idle_timeout=0,actions=drop
 sudo ovs-ofctl add-flow s6 ip,priority=65500,in_port=6,idle_timeout=0,actions=drop
 
