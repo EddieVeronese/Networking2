@@ -32,7 +32,7 @@ set port s3-eth1 qos=@newqos -- \
 set port s3-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=1000000 \
-queues:12=@1q queues:910=@2q-- \
+queues:12=@1q queues:910=@2q -- \
 --id=@1q create queue other-config:min-rate=100000 other-config:max-rate=700000 -- \
 --id=@2q create queue other-config:min-rate=100000 other-config:max-rate=300000
 
