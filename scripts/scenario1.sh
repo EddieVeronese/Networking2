@@ -1,4 +1,8 @@
 #!/bin/sh
+for bridge in $(sudo ovs-vsctl list-br)
+do
+    sudo ovs-ofctl del-flows $bridge
+done
 
 printf "Ops, Francisco ha rotto uno switch\n"
 

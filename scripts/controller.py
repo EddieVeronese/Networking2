@@ -9,9 +9,17 @@ from ryu.lib.packet import ether_types
 from ryu.lib.packet import udp
 from ryu.lib.packet import tcp
 from ryu.lib.packet import icmp
+from enum import Enum
 import subprocess
 import threading
 import time
+
+
+class EmergencyType(Enum):
+    NONE = 0
+    SWITCH_BROKEN = 1
+    NEW_HOSTS = 2
+
 
 class TrafficSlicing(app_manager.RyuApp):
 
@@ -71,6 +79,15 @@ class TrafficSlicing(app_manager.RyuApp):
                 "00:00:00:00:00:08": 3,
             }
         }  
+        
+        # Set utils for simulating emergency situations
+        self.emergency_type = 0
+        self.time = time.time()
+        
+        # Listens to the timer() function.  
+        self.threadd = threading.Thread(target=self.run_simulation, args=())
+        self.threadd.daemon = True
+        self.threadd.start()
 
         
 
@@ -153,4 +170,25 @@ class TrafficSlicing(app_manager.RyuApp):
 
             self._send_package(msg, datapath, in_port, actions)
     
+        # Function that automates the alternation between Emergency and Non-Emergency Scenario                
+    def run_simulation(self):
+        time.sleep(5)
+
+        while True:
+            
+            self.emergency_type = input("\n\nTypes of emergencies:\n \t0 -> No Emergency\n \t1-> Switch Broken\n \t2-> New Hosts\nEnter value: ")
+
+            if int(self.emergency_type) == EmergencyType.NONE.value:
+                subprocess.call("./default.sh")	
+            elif int(self.emergency_type) == EmergencyType.SWITCH_BROKEN.value:
+                subprocess.call("./scenario1.sh")
+            
+            elif int(self.emergency_type) == EmergencyType.NEW_HOSTS.value:
+                subprocess.call("./scenario2.sh")
+            
+            else:
+                print("Command not found, please insert a valid value")
+            
+            time.sleep(5)
+            
     

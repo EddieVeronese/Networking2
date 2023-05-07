@@ -1,5 +1,8 @@
 #!/bin/sh
-
+for bridge in $(sudo ovs-vsctl list-br)
+do
+    sudo ovs-ofctl del-flows $bridge
+done
 
 # Switch 1 2000 Mb
 printf "Switch 1\n"
