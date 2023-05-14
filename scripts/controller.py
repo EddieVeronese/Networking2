@@ -181,7 +181,7 @@ class TrafficSlicing(app_manager.RyuApp):
             if int(self.emergency_type) == EmergencyType.NONE.value:
                 subprocess.call("./default.sh")	
             elif int(self.emergency_type) == EmergencyType.SWITCH_BROKEN.value:
-                subprocess.call("./scenario1.sh")
+                subprocess.call("./scenario4.sh")
             
             elif int(self.emergency_type) == EmergencyType.NEW_HOSTS.value:
                 subprocess.call("./scenario2.sh")
