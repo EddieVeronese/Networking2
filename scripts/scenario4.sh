@@ -132,17 +132,17 @@ sudo ovs-ofctl add-flow s5 ip,priority=65500,in_port=1,idle_timeout=0,actions=dr
 sudo ovs-ofctl add-flow s5 ip,priority=65500,in_port=2,idle_timeout=0,actions=drop
 
 # Switch 6
-sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.2,idle_timeout=0,actions=set_queue:1,output:2
-sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.2,idle_timeout=0,actions=set_queue:1,output:3
+sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.2,idle_timeout=0,actions=set_queue:2,output:2
+sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.2,idle_timeout=0,actions=set_queue:2,output:3
 
-sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.4,idle_timeout=0,actions=set_queue:1,output:4
-sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.4,idle_timeout=0,actions=set_queue:1,output:2
+sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.4,idle_timeout=0,actions=set_queue:2,output:4
+sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.4,idle_timeout=0,actions=set_queue:2,output:2
 
-sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.5,idle_timeout=0,actions=set_queue:1,output:4
-sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.5,idle_timeout=0,actions=set_queue:1,output:3
+sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.5,idle_timeout=0,actions=set_queue:2,output:4
+sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.5,idle_timeout=0,actions=set_queue:2,output:3
 
-sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.7,idle_timeout=0,actions=set_queue:1,output:4
-sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.7,idle_timeout=0,actions=set_queue:1,output:3
+sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.7,idle_timeout=0,actions=set_queue:2,output:4
+sudo ovs-ofctl add-flow s6 ip,priority=65500,nw_src=10.0.0.7,idle_timeout=0,actions=set_queue:2,output:3
 
 sudo ovs-ofctl add-flow s6 ip,priority=65500,in_port=5,idle_timeout=0,actions=drop
 sudo ovs-ofctl add-flow s6 ip,priority=65500,in_port=6,idle_timeout=0,actions=drop
