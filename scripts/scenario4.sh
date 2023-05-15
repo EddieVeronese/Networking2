@@ -17,7 +17,7 @@ queues:1=@1q -- \
 --id=@1q create queue other-config:min-rate=200000 other-config:max-rate=2000000
 
 # Switch 2 2000 Mb ->for 2_slice
-printf "Switch 2\n"
+printf "\nSwitch 2\n"
 sudo ovs-vsctl -- \
 set port s2-eth1 qos=@newqos -- \
 set port s2-eth2 qos=@newqos -- \
