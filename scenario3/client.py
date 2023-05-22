@@ -8,7 +8,7 @@ About: Simple client.
 import socket
 import time
 
-SERVICE_IP = "10.0.0.12"
+SERVICE_IP = "10.0.0.13"
 SERVICE_PORT = 8888
 
 if __name__ == "__main__":
