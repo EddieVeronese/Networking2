@@ -15,7 +15,7 @@ from comnetsemu.cli import CLI
 from comnetsemu.net import Containernet, VNFManager
 from mininet.link import TCLink
 from mininet.log import info, setLogLevel
-from mininet.node import Controller
+from mininet.node import Controller, RemoteController
 
 
 def get_ofport(ifce: str):
@@ -37,11 +37,12 @@ if __name__ == "__main__":
 
     setLogLevel("info")
 
-    net = Containernet(controller=Controller, link=TCLink, xterms=False)
+    net = Containernet(controller=RemoteController, link=TCLink, xterms=False)
     mgr = VNFManager(net)
 
     info("*** Add the default controller\n")
-    net.addController("c0")
+    controller=RemoteController( 'c0', ip='127.0.0.1', port=6653)
+    net.addController(controller)
 
     info("*** Creating the client and hosts\n")
     h1 = net.addDockerHost(
@@ -71,29 +72,39 @@ if __name__ == "__main__":
     s3 = net.addSwitch("s3")
     s4 = net.addSwitch("s4")
     
-    net.addLinkNamedIfce(s1, h1, bw=1000, delay="5ms")
-    net.addLinkNamedIfce(s2, h2, bw=1000, delay="5ms")
-    net.addLink(s1, s2, intfName1='s1-s2', intfName2='s2-s1', bw=1000, delay="5ms")
-    net.addLink(s1, s3, intfName1='s1-s3', intfName2='s3-s1', bw=1000, delay="5ms")
-    net.addLink(s3, s4, intfName1='s3-s4', intfName2='s4-s3', bw=1000, delay="5ms")
-    net.addLink(s4, s2, intfName1='s4-s2', intfName2='s2-s4', bw=1000, delay="5ms")
+    
     # Add the interfaces for service traffic.
     net.addLinkNamedIfce(s3, h3, bw=1000, delay="5ms")
     net.addLinkNamedIfce(s4, h4, bw=1000, delay="5ms")
+    net.addLinkNamedIfce(s1, h1, bw=1000, delay="5ms")
+    net.addLinkNamedIfce(s2, h2, bw=1000, delay="5ms")
+    net.addLinkNamedIfce(s1, s2, bw=1000, delay="5ms")
+    net.addLinkNamedIfce(s1, s3, bw=1000, delay="5ms")
+    net.addLinkNamedIfce(s3, s4, bw=1000, delay="5ms")
+    net.addLinkNamedIfce(s4, s2, bw=1000, delay="5ms")
+
+    h1.setMAC("00:00:00:00:00:01", intf="h1-s1")
+    h2.setMAC("00:00:00:00:00:02", intf="h2-s2")
+    h3.setMAC("00:00:00:00:00:03", intf="h3-s3")
+    h4.setMAC("00:00:00:00:00:04", intf="h4-s4")
+
     # Add the interface for host internal traffic.
+    """
     net.addLink(
         s4, h4, bw=1000, delay="1ms", intfName1="s4-h4-int", intfName2="h4-s4-int"
     )
     net.addLink(
         s3, h3, bw=1000, delay="1ms", intfName1="s3-h3-int", intfName2="h3-s3-int"
     )
+    
     net.addLink(
         s3, s4, bw=1000, delay="1ms", intfName1="s3-s4-int", intfName2="s4-s3-int"
-    )
-    
+    )           
+    """
     ##########################################################
     
     info("\n*** Starting network\n")
+    net.build()
     net.start()
 
     s1_h1_port_num = get_ofport("s1-h1")
@@ -107,20 +118,20 @@ if __name__ == "__main__":
     s4_s2_port_num = get_ofport("s4-s2")
     s4_s3_port_num = get_ofport("s4-s3")
 
-
+    """
     h3_mac = h3.MAC(intf="h3-s3")
     h4_mac = h4.MAC(intf="h4-s4")
 
     h3.setMAC("00:00:00:00:00:13", intf="h3-s3")
     h4.setMAC("00:00:00:00:00:13", intf="h4-s4")
 
-    info("*** Use the subnet 192.168.0.0/24 for internal traffic between h2 and h3.\n")
+    info("*** Use the subnet 192.168.0.0/24 for internal traffic between h3 and h4.\n")
     print("- Internal IP of h2: 192.168.0.12")
     print("- Internal IP of h3: 192.168.0.13")
     h3.cmd("ip addr add 192.168.0.13/24 dev h3-s3-int")
     h4.cmd("ip addr add 192.168.0.14/24 dev h4-s4-int")
     h3.cmd("ping -c 3 192.168.0.14")
-
+    """ 
 ######################################################################
 
 
@@ -128,71 +139,150 @@ if __name__ == "__main__":
     # `ovs-ofctl` utility provided by the OvS.
     # For realistic setup, switches should be managed by a remote controller.
     info("*** Add flow to forward traffic from h1 to h2 to switch s1.\n")
+    h1_ip = "10.0.0.11"
+    h2_ip = "10.0.0.12"
+    h3_ip = "10.0.0.13"
+    h4_ip = "10.0.0.14"
+
     check_output(
         shlex.split(
-            'ovs-ofctl add-flow s1 "in_port={}, actions=output:{}"'.format(
+            'ovs-ofctl add-flow s1 "priority=65500,in_port={},idle_timeout=0,actions=output:{}"'.format(
                 s1_h1_port_num, s1_s3_port_num
             )
         )
     )
-    check_output(
+    check_output( 
         shlex.split(
-            'ovs-ofctl add-flow s2 "in_port={}, actions=output:{}"'.format(
+            'ovs-ofctl add-flow s1 "priority=65500,in_port={},idle_timeout=0,actions=output:{}"'.format(
+                s1_s3_port_num, s1_h1_port_num
+            )
+        )
+    )
+
+    check_output( 
+        shlex.split(
+            'ovs-ofctl add-flow s2 "priority=65500,in_port={},idle_timeout=0,actions=output:{}"'.format(
                 s2_h2_port_num, s2_s4_port_num
             )
         )
     )
+    check_output( 
+        shlex.split(
+            'ovs-ofctl add-flow s2 "priority=65500,in_port={},idle_timeout=0,actions=output:{}"'.format(
+                s2_s4_port_num, s2_h2_port_num
+            )
+        )
+    )
+    
+    
     check_output(
         shlex.split(
-            'ovs-ofctl add-flow s3 "in_port={}, actions=output:{}"'.format(
+            'ovs-ofctl add-flow s3 "priority=65500,in_port={},idle_timeout=0,actions=output:{}"'.format(
                 s3_s1_port_num, s3_h3_port_num
             )
         )
     )
+
     check_output(
         shlex.split(
-            'ovs-ofctl add-flow s3 "in_port={}, actions=output:{}"'.format(
+            'ovs-ofctl add-flow s3 "priority=65500,in_port={},idle_timeout=0,actions=output:{},output:{}"'.format(
+                s3_h3_port_num, s3_s1_port_num, s3_s4_port_num
+            )
+        )
+    )
+
+    check_output(
+        shlex.split(
+            'ovs-ofctl add-flow s3 "priority=65500,in_port={},idle_timeout=0,actions=output:{}"'.format(
                 s3_s4_port_num, s3_h3_port_num
             )
         )
     )
+
+    
+    """ IP BUG
     check_output(
         shlex.split(
-            'ovs-ofctl add-flow s4 "in_port={}, actions=output:{}"'.format(
-                s4_s2_port_num, s4_s3_port_num
+            'ovs-ofctl add-flow s4 "priority=65500,ip,nw_src=10.0.0.13,nw_dst=10.0.0.14,idle_timeout=0,actions=output:{}"'.format(
+                s4_h4_port_num
+            )
+        )
+    )
+    """
+
+    check_output(
+        shlex.split(
+            'ovs-ofctl add-flow s4 "priority=65500,in_port={},idle_timeout=0,actions=output:{}"'.format(
+                s4_h4_port_num, s4_s3_port_num
             )
         )
     )
 
-    info("*** h1 ping 10.0.0.13 with 3 packets: \n")
+    check_output(
+        shlex.split(
+            'ovs-ofctl add-flow s4 "priority=65500,in_port={},idle_timeout=0,actions=output:{},output:{}"'.format(
+                s4_s3_port_num, s4_s2_port_num, s4_h4_port_num
+            )
+        )
+    )
+
+    check_output(
+        shlex.split(
+            'ovs-ofctl add-flow s4 "priority=65500,in_port={},idle_timeout=0,actions=output:{}"'.format(
+                s4_s2_port_num, s4_s3_port_num
+            )
+        )
+    )
+    
+
+
+    info("*** h1 & h2 ping 10.0.0.13 with 3 packets: \n")
     ret = h1.cmd("ping -c 3 10.0.0.13")
     print(ret)
 
-    """
+    ret = h3.cmd("ping -c 3 10.0.0.14")
+    print(ret)
+
+    info("*** h2 ping 10.0.0.14 with 3 packets: (SHOULD FAIL)\n")
+    ret = h2.cmd("ping -c 3 10.0.0.14")
+    print(ret)
+
+    
     info("*** Deploy counter service on h3.\n")
     counter_server_h3 = mgr.addContainer(
         "counter_server_h3", "h3", "service_migration", "python /home/server.py h3"
     )
-    time.sleep(3)
+    time.sleep(5)
     info("*** Deploy client app on h1.\n")
-    client_app = mgr.addContainer(
+    client1_app = mgr.addContainer(
         "client", "h1", "service_migration", "python /home/client.py"
     )
     time.sleep(10)
-    client_log = client_app.getLogs()
+    client_log = client1_app.getLogs()
     print("\n*** Setup1: Current log of the client: \n{}".format(client_log))
 
-    info("*** Migrate (Re-deploy) the couter service to h3.\n")
-    counter_server_h3 = mgr.addContainer(
-        "counter_server_h3",
-        "h3",
+    # NEW
+    info("*** Migrate (Re-deploy) the couter service to h4.\n")
+    counter_server_h4 = mgr.addContainer(
+        "counter_server_h4",
+        "h4",
         "service_migration",
-        "python /home/server.py h3 --get_state",
+        "python /home/server.py h4 --get_state",
     )
     info(
         "*** Send SEGTERM signal to the service running on the h2.\n"
         "Let it transfer its state through the internal network.\n"
     )
+
+    time.sleep(10)
+    service_log = counter_server_h3.getLogs()
+    print("\n*** Current log of the service on h3: \n{}".format(service_log))
+
+    service_log = counter_server_h4.getLogs()
+    print("\n*** Current log of the service on h4: \n{}".format(service_log))
+
+
+    """
     pid_old_service = (
         check_output(shlex.split("pgrep -f '^python /home/server.py h2$'"))
         .decode("utf-8")
@@ -220,6 +310,8 @@ if __name__ == "__main__":
     time.sleep(10)
     client_log = client_app.getLogs()
     print("\n*** Setup2: Current log of the client: \n{}".format(client_log))
+
+    ##########
 
     info("*** Migrate (Re-deploy) the couter service back to h2.\n")
     counter_server_h2 = mgr.addContainer(
@@ -258,6 +350,9 @@ if __name__ == "__main__":
     """
     if not AUTOTEST_MODE:
         CLI(net)
+
+    mgr.removeContainer("counter_server_h3")
+    mgr.removeContainer("counter_server_h4")
 
     net.stop()
     mgr.stop()

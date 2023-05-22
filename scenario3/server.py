@@ -10,22 +10,23 @@ import signal
 import socket
 import time
 
-INTERNAL_IP_H2 = "192.168.0.12"
 INTERNAL_IP_H3 = "192.168.0.13"
+INTERNAL_IP_H4 = "192.168.0.14"
 INTERNAL_PORT = 9999
-SERVICE_IP = "10.0.0.12"
+SERVICE_IP = "10.0.0.13"
 SERVICE_PORT = 8888
 HOST_NAME = None
 
 
 def recv_state(host_name):
-    """Get the latest counter state from the internal
-    network between h2 and h3.
     """
-    if host_name == "h2":
-        recv_ip = INTERNAL_IP_H2
-    else:
+    Get the latest counter state from the internal
+    network between h3 and h4.
+    """
+    if host_name == "h3":
         recv_ip = INTERNAL_IP_H3
+    else:
+        recv_ip = INTERNAL_IP_H4
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((recv_ip, INTERNAL_PORT))
 
@@ -36,7 +37,7 @@ def recv_state(host_name):
 
 def run(host_name, get_state=False):
     """Run the couting service and handle sigterm signal."""
-    counter = 0
+    counter = 666
     if get_state:
         counter = recv_state(host_name)
         print("Get the init counter state: {}".format(counter))
@@ -44,10 +45,10 @@ def run(host_name, get_state=False):
     # Use closure to avoid using a global variable for state.
     def term_signal_handler(signum, frame):
         # Check if the server is running on the host 2.
-        if host_name == "h2":
-            dest_ip = INTERNAL_IP_H3
+        if host_name == "h3":
+            dest_ip = INTERNAL_IP_H4
         else:
-            dest_ip = INTERNAL_IP_H2
+            dest_ip = INTERNAL_IP_H3
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         # Send duplicated packets to avoid losses.
         for _ in range(6):
@@ -55,7 +56,7 @@ def run(host_name, get_state=False):
         sock.close()
 
     signal.signal(signal.SIGTERM, term_signal_handler)
-
+ 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((SERVICE_IP, SERVICE_PORT))
 
