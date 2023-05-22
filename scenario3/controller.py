@@ -3,7 +3,7 @@ from ryu.controller.handler import set_ev_cls
 from ryu.base import app_manager
 from ryu.controller.handler import CONFIG_DISPATCHER, MAIN_DISPATCHER
 from ryu.ofproto import ofproto_v1_3
-from ryu.lib.packet import packet
+from ryu.lib.packet import packet, ipv6, ipv4
 from ryu.lib.packet import ethernet
 from ryu.lib.packet import ether_types
 from ryu.lib.packet import udp
@@ -29,66 +29,37 @@ class TrafficSlicing(app_manager.RyuApp):
         super(TrafficSlicing, self).__init__(*args, **kwargs)
 
         self.mac_to_port = {
-            
             1: {
-                "00:00:00:00:00:01": 4, 
-                "00:00:00:00:00:02": 1, 
+                "00:00:00:00:00:01": 1, 
+                "00:00:00:00:00:02": 2, 
                 "00:00:00:00:00:03": 3, 
-                "00:00:00:00:00:04": 2,
-                "00:00:00:00:00:09": 5,
-                "00:00:00:00:00:0b": 6
+                "00:00:00:00:00:04": 3
             },
 
             2: {
-                "00:00:00:00:00:05": 4, 
-                "00:00:00:00:00:06": 1, 
-                "00:00:00:00:00:07": 3, 
-                "00:00:00:00:00:08": 2,
+                "00:00:00:00:00:02": 1, 
+                "00:00:00:00:00:01": 2, 
+                "00:00:00:00:00:04": 3, 
+                "00:00:00:00:00:04": 3
             },
 
             3: {
-                "00:00:00:00:00:01": 1,
-                "00:00:00:00:00:02": 2, 
+                "00:00:00:00:00:03": 1,
+                "00:00:00:00:00:01": 2,
+                "00:00:00:00:00:04": 3,
+                "00:00:00:00:00:02": 3,
+                
             },
 
             4: {
-                "00:00:00:00:00:03": 1, 
-                "00:00:00:00:00:04": 2, 
-                "00:00:00:00:00:05": 4, 
-                "00:00:00:00:00:06": 3
-            },
-
-            5: {
-                "00:00:00:00:00:07": 1,
-                "00:00:00:00:00:08": 2, 
-            },
-
-            6: {
-                "00:00:00:00:00:01": 1, 
-                "00:00:00:00:00:02": 4, 
+                "00:00:00:00:00:04": 1, 
                 "00:00:00:00:00:03": 2, 
-                "00:00:00:00:00:04": 3,
-                "00:00:00:00:00:0a": 5,
-                "00:00:00:00:00:0c": 6
-            },
-
-            7: {
-                "00:00:00:00:00:05": 1, 
-                "00:00:00:00:00:06": 4, 
-                "00:00:00:00:00:07": 2, 
-                "00:00:00:00:00:08": 3,
+                "00:00:00:00:00:01": 2, 
+                "00:00:00:00:00:02": 3
             }
+            
         }  
         
-        # Set utils for simulating emergency situations
-        self.emergency_type = 0
-        self.time = time.time()
-        
-        # Listens to the timer() function.  
-        self.threadd = threading.Thread(target=self.run_simulation, args=())
-        self.threadd.daemon = True
-        self.threadd.start()
-
         
 
     @set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
@@ -140,7 +111,6 @@ class TrafficSlicing(app_manager.RyuApp):
 
     @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
     def _packet_in_handler(self, ev):
-        
         msg = ev.msg
 
         datapath = msg.datapath
@@ -151,16 +121,27 @@ class TrafficSlicing(app_manager.RyuApp):
 
         eth = pkt.get_protocol(ethernet.ethernet)
 
+        print("Sono qua")
+
         if eth.ethertype == ether_types.ETH_TYPE_LLDP:
             return
+        
+        if eth.ethertype == ether_types.ETH_TYPE_IPV6:
+            ipv6_pkt = pkt.get_protocol(ipv6.ipv6)
+            ip_dst = ipv6_pkt.dst
+        else:
+            ipv4_pkt = pkt.get_protocol(ipv4.ipv4)
+            ip_dst = ipv4_pkt.ipv4_dst
+            print(f"IPv4 {ip_dst}")
         
         dst = eth.dst
 
         dpid = datapath.id
 
-        print(f"Eccolo {dst}") 
-        
+        print(f"Eccolo {dst} e {dpid}")
+
         if dst in self.mac_to_port[dpid]: 
+            print("Eccolo")
 
             out_port = self.mac_to_port[dpid][dst]
 
@@ -172,25 +153,6 @@ class TrafficSlicing(app_manager.RyuApp):
 
             self._send_package(msg, datapath, in_port, actions)
     
-        # Function that automates the alternation between Emergency and Non-Emergency Scenario                
-    def run_simulation(self):
-        time.sleep(5)
-
-        while True:
-            
-            self.emergency_type = input("\n\nTypes of emergencies:\n \t0 -> No Emergency\n \t1-> Switch Broken\n \t2-> New Hosts\nEnter value: ")
-
-            if int(self.emergency_type) == EmergencyType.NONE.value:
-                subprocess.call("./default.sh")	
-            elif int(self.emergency_type) == EmergencyType.SWITCH_BROKEN.value:
-                subprocess.call("./scenario1.sh")
-            
-            elif int(self.emergency_type) == EmergencyType.NEW_HOSTS.value:
-                subprocess.call("./scenario2.sh")
-            
-            else:
-                print("Command not found, please insert a valid value")
-            
-            time.sleep(5)
+        
             
     
