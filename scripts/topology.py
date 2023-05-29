@@ -71,7 +71,7 @@ if __name__ == "__main__":
     net.build()
     net.start()
 
-    subprocess.call("./scenario2.sh")
+    subprocess.call("./default.sh")
 
     
     CLI(net)

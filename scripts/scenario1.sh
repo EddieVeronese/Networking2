@@ -12,10 +12,10 @@ sudo ovs-vsctl -- \
 set port s1-eth1 qos=@newqos -- \
 set port s1-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
-other-config:max-rate=2000000 \
+other-config:max-rate=200000000 \
 queues:12=@1q queues:34=@2q -- \
---id=@1q create queue other-config:min-rate=100000 other-config:max-rate=500000 -- \
---id=@2q create queue other-config:min-rate=100000 other-config:max-rate=500000
+--id=@1q create queue other-config:min-rate=1000000 other-config:max-rate=50000000 -- \
+--id=@2q create queue other-config:min-rate=1000000 other-config:max-rate=50000000
 
 # Switch 2
 printf "Switch 2\n"
@@ -23,10 +23,10 @@ sudo ovs-vsctl -- \
 set port s2-eth1 qos=@newqos -- \
 set port s2-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
-other-config:max-rate=2000000 \
+other-config:max-rate=200000000 \
 queues:56=@1q queues:78=@2q -- \
---id=@1q create queue other-config:min-rate=100000 other-config:max-rate=1000000 -- \
---id=@2q create queue other-config:min-rate=100000 other-config:max-rate=1000000
+--id=@1q create queue other-config:min-rate=1000000 other-config:max-rate=100000000 -- \
+--id=@2q create queue other-config:min-rate=1000000 other-config:max-rate=100000000
 
 # Switch 3
 printf "\nSwitch 3\n"
@@ -34,10 +34,10 @@ sudo ovs-vsctl -- \
 set port s3-eth1 qos=@newqos -- \
 set port s3-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
-other-config:max-rate=1000000 \
+other-config:max-rate=100000000 \
 queues:12=@1q queues:34=@2q -- \
---id=@1q create queue other-config:min-rate=100000 other-config:max-rate=500000 -- \
---id=@2q create queue other-config:min-rate=1000000 other-config:max-rate=500000
+--id=@1q create queue other-config:min-rate=1000000 other-config:max-rate=50000000 -- \
+--id=@2q create queue other-config:min-rate=1000000 other-config:max-rate=50000000
 
 # Switch 4
 printf "\nSwitch 4\n"
@@ -45,10 +45,10 @@ sudo ovs-vsctl -- \
 set port s4-eth3 qos=@newqos -- \
 set port s4-eth4 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
-other-config:max-rate=2000000 \
+other-config:max-rate=200000000 \
 queues:56=@1q queues:78=@2q -- \
---id=@1q create queue other-config:min-rate=100000 other-config:max-rate=1000000 -- \
---id=@2q create queue other-config:min-rate=100000 other-config:max-rate=1000000
+--id=@1q create queue other-config:min-rate=1000000 other-config:max-rate=100000000 -- \
+--id=@2q create queue other-config:min-rate=1000000 other-config:max-rate=100000000
 
 # Switch 6
 printf "\nSwitch 6\n"
@@ -56,10 +56,10 @@ sudo ovs-vsctl -- \
 set port s6-eth1 qos=@newqos -- \
 set port s6-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
-other-config:max-rate=2000000 \
+other-config:max-rate=200000000 \
 queues:12=@1q queues:34=@2q -- \
---id=@1q create queue other-config:min-rate=100000 other-config:max-rate=500000 -- \
---id=@2q create queue other-config:min-rate=100000 other-config:max-rate=500000
+--id=@1q create queue other-config:min-rate=1000000 other-config:max-rate=50000000 -- \
+--id=@2q create queue other-config:min-rate=1000000 other-config:max-rate=50000000
 
 # Switch 7
 printf "\nSwitch 7\n"
@@ -69,8 +69,8 @@ set port s7-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=2000000 \
 queues:56=@1q queues:78=@2q -- \
---id=@1q create queue other-config:min-rate=100000 other-config:max-rate=1000000 -- \
---id=@2q create queue other-config:min-rate=100000 other-config:max-rate=1000000
+--id=@1q create queue other-config:min-rate=1000000 other-config:max-rate=100000000 -- \
+--id=@2q create queue other-config:min-rate=1000000 other-config:max-rate=100000000
 
 
 # Creating links with new_src
