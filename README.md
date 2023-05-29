@@ -14,13 +14,11 @@ Per testare connessione UDP:
 h1 iperf -s -u &
 h2 iperf -c 10.0.0.1 -u -t 5 -i 1
 ```  
-Per testare connessione UDP:  
+Per testare connessione TCP:  
 ```
 h3 iperf -s &
 h4 iperf -c 10.0.0.3 -t 5 -i 1
 ```  
-
-Per testare connessione TCP:
 
 Scenario di default:
 ![](images/default.jpg)
