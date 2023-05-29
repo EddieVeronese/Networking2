@@ -8,7 +8,16 @@ Per provare il progetto:
 - chmod +x di tutti i file sh
 - nel primo terminale ryu-manager controller.py
 - nel secondo terminale suo python3 topology.py
-- nel secondo terminale pingall
+
+Per testare connessione UDP:
+h1 iperf -s -u &
+h2 iperf -c 10.0.0.1 -u -t 5 -i 1
+
+Per testare connessione UDP:
+h3 iperf -s &
+h4 iperf -c 10.0.0.3 -t 5 -i 1
+
+Per testare connessione TCP:
 
 Scenario di default:
 ![](images/default.jpg)
