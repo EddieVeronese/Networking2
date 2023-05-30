@@ -30,19 +30,23 @@ In this scenario we don't know what we are doing.
 
 # How To 
 ## How to Download
-1. Go inside ```.../comnetsemu/app```
-2. Clone this repository ```git clone ```
+1. Go inside ``` .../comnetsemu/app ```
+2. Clone this repository ``` git clone ... ```
 
 ## How to Run
 1. Open a comnetsemu portale or similar
 2. Open the project folder and go into "scripts"
-3. Run the controller: ```ryu-manager controller.py```
-4. Run the topology: ```sudo python3 topology.py```
+3. Run the controller: ``` ryu-manager controller.py ```
+4. Run the topology: ``` sudo python3 topology.py ```
 5. Use the GUI to interact with the simulated network
 
 ## How to Stop
 1. Stop the Ryu controller
-2. Stop mininet and clean the environment ```mininet> exit  $ sudo mn -c```
+2. Stop mininet and clean the environment 
+```
+mininet> exit  
+$ sudo mn -c
+```
 
 Per provare il progetto:
 - clona la repository
