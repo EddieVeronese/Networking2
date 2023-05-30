@@ -181,7 +181,6 @@ sudo ovs-ofctl add-flow s6 priority=65500,tcp,in_port=3,idle_timeout=0,actions=s
 #sudo ovs-ofctl add-flow s6 priority=65500,tcp,in_port=1,idle_timeout=0,actions=set_queue:123401,output:4,output:3
 
 
-
 # Switch 7
 sudo ovs-ofctl add-flow s7 priority=65500,udp,ip,nw_dst=10.0.0.8,idle_timeout=0,actions=set_queue:567800,output:3
 sudo ovs-ofctl add-flow s7 priority=65500,udp,ip,nw_dst=10.0.0.6,idle_timeout=0,actions=set_queue:567800,output:4
