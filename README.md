@@ -47,11 +47,11 @@ In this scenario we don't know what we are doing.
 ## How to Run
 1. Open a comnetsemu portale or similar
 2. Open the project folder and go into "scripts"
-3. Check that the files .sh have the permissions to run, otherwise run this command on all bash files:
+3. Check that the files .sh have the permissions to run, otherwise run this command on all bash files:  
 ``` chmod +x file_name.sh ```
-5. Run the controller: 
+5. Run the controller:  
 ``` ryu-manager controller.py ```
-6. Run the topology: 
+6. Run the topology:   
 ``` sudo python3 topology.py ```
 8. Use the GUI to interact with the simulated network
 
