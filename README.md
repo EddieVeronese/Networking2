@@ -20,10 +20,21 @@ In this scenario, two hosts are added to the network, let's see how the network 
 
 ## Scenario 3 (Francesco il Magnifico)
 In this scenario, there are four possible slices that can be activated:
-  - slice1 -> enables UDP communications between h1,h2,h3,h4
-  - slice2 -> enables UDP communications between h5,h6,h7,h8
-  - slice3 -> enables TCP & ICMP communications between h1,h2,h3,h4
-  - slice4 -> enables TCP & ICMP communications between h5,h6,h7,h8
+  - slice1 &#8594; enables UDP communications between h1,h2,h3,h4
+  - slice2 &#8594; enables UDP communications between h5,h6,h7,h8
+  - slice3 &#8594; enables TCP & ICMP communications between h1,h2,h3,h4
+  - slice4 &#8594; enables TCP & ICMP communications between h5,h6,h7,h8
+
+Testing UDP connection:
+```
+h1 iperf -s -u &
+h2 iperf -c 10.0.0.1 -u -t 5 -i 1
+```  
+Testing TCP connection:  
+```
+h3 iperf -s &
+h4 iperf -c 10.0.0.3 -t 5 -i 1
+```  
 
 ## Scenario 4 (Il più brutto)
 In this scenario we don't know what we are doing.
@@ -36,9 +47,13 @@ In this scenario we don't know what we are doing.
 ## How to Run
 1. Open a comnetsemu portale or similar
 2. Open the project folder and go into "scripts"
-3. Run the controller: ``` ryu-manager controller.py ```
-4. Run the topology: ``` sudo python3 topology.py ```
-5. Use the GUI to interact with the simulated network
+3. Check that the files .sh have the permissions to run, otherwise run this command on all bash files:
+``` chmod +x file_name.sh ```
+5. Run the controller: 
+``` ryu-manager controller.py ```
+6. Run the topology: 
+``` sudo python3 topology.py ```
+8. Use the GUI to interact with the simulated network
 
 ## How to Stop
 1. Stop the Ryu controller
@@ -48,24 +63,6 @@ mininet> exit
 $ sudo mn -c
 ```
 
-Per provare il progetto:
-- clona la repository
-- vai nella cartella di riferimento con due terminali
-- sudo mn -c
-- chmod +x di tutti i file sh
-- nel primo terminale ryu-manager controller.py
-- nel secondo terminale suo python3 topology.py
-
-Per testare connessione UDP:
-```
-h1 iperf -s -u &
-h2 iperf -c 10.0.0.1 -u -t 5 -i 1
-```  
-Per testare connessione TCP:  
-```
-h3 iperf -s &
-h4 iperf -c 10.0.0.3 -t 5 -i 1
-```  
 
 Scenario di default:
 ![](images/default.jpg)
