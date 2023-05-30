@@ -19,7 +19,7 @@ queues:123400=@1q queues:123401=@2q -- \
 # Switch 2
 printf "Switch 2\n"
 sudo ovs-vsctl -- \
-set port s2-eth1 qos=@newqos -- \idle_timeout
+set port s2-eth1 qos=@newqos -- \
 set port s2-eth2 qos=@newqos -- \
 --id=@newqos create QoS type=linux-htb \
 other-config:max-rate=2000000 \
