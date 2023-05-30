@@ -41,18 +41,30 @@ In this scenario we don't know what we are doing.
 
 # How To 
 ## How to Download
-1. Go inside ``` .../comnetsemu/app ```
-2. Clone this repository ``` git clone ... ```
+1. Go inside  
+``` 
+.../comnetsemu/app 
+```
+3. Clone this repository  
+``` 
+git clone ... 
+```
 
 ## How to Run
 1. Open a comnetsemu portale or similar
 2. Open the project folder and go into "scripts"
 3. Check that the files .sh have the permissions to run, otherwise run this command on all bash files:  
-``` chmod +x file_name.sh ```
+``` 
+chmod +x file_name.sh 
+```
 5. Run the controller:  
-``` ryu-manager controller.py ```
+``` 
+ryu-manager controller.py 
+```
 6. Run the topology:   
-``` sudo python3 topology.py ```
+``` 
+sudo python3 topology.py 
+```
 8. Use the GUI to interact with the simulated network
 
 ## How to Stop
