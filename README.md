@@ -14,7 +14,7 @@ In this project of Softwarize & Virtualized Networks, we will face some use case
 In this scenario, we simulate the break of switch 5 and how the network should react to that in order to mantain the QoS.
 
 
-## Scenario 2 (Federicchio Banani)
+## Scenario 2 (Still Peddi Perrons)
 In this scenario, two hosts are added to the network, let's see how the network can adapt to this increase of traffic while mantaining a good QoS.
 
 
@@ -37,7 +37,7 @@ h4 iperf -c 10.0.0.3 -t 5 -i 1
 ```  
 
 ## Scenario 4 (Il più brutto)
-In this scenario we don't know what we are doing, because Federicchio Banani made it
+In this scenario we don't know what we are doing, because Federicchio Banani made it (implemented by Eddie of course)
 
 # How To 
 ## How to Download
