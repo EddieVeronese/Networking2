@@ -14,11 +14,12 @@ import subprocess
 import threading
 import time
 
-
 class EmergencyType(Enum):
     NONE = 0
     SWITCH_BROKEN = 1
     NEW_HOSTS = 2
+    FILTER = 3
+    CHANGE_CONNECTION = 4
 
 
 class TrafficSlicing(app_manager.RyuApp):
@@ -83,6 +84,8 @@ class TrafficSlicing(app_manager.RyuApp):
         # Set utils for simulating emergency situations
         self.emergency_type = 0
         self.time = time.time()
+
+        self.in_filter = False;
         
         # Listens to the timer() function.  
         self.threadd = threading.Thread(target=self.run_simulation, args=())
@@ -178,19 +181,50 @@ class TrafficSlicing(app_manager.RyuApp):
 
         while True:
             
-            self.emergency_type = input("\n\nTypes of emergencies:\n \t0 -> No Emergency\n \t1-> Switch Broken\n \t2-> New Hosts\nEnter value: ")
+            if self.in_filter == False:
+                self.emergency_type = input("\n\nTypes of emergencies:\n \t0 -> No Emergency\n \t1-> Switch Broken\n \t2-> New Hosts\n \t3-> Filter\n \t4-> Chage connection\n Enter value: ")
 
-            if int(self.emergency_type) == EmergencyType.NONE.value:
-                subprocess.call("./default.sh")	
-            elif int(self.emergency_type) == EmergencyType.SWITCH_BROKEN.value:
-                subprocess.call("./scenario1.sh")
-            
-            elif int(self.emergency_type) == EmergencyType.NEW_HOSTS.value:
-                subprocess.call("./scenario2.sh")
-            
+                if int(self.emergency_type) == EmergencyType.NONE.value:
+                    subprocess.call("./default.sh")	
+
+                elif int(self.emergency_type) == EmergencyType.SWITCH_BROKEN.value:
+                    subprocess.call("./scenario1.sh")
+        
+                elif int(self.emergency_type) == EmergencyType.NEW_HOSTS.value:
+                    subprocess.call("./scenario2.sh")
+                
+                elif int(self.emergency_type) == EmergencyType.FILTER.value:
+                    subprocess.call("./scenario3_copy.sh")
+
+                    self.in_filter = True;
+
+                elif int(self.emergency_type) == EmergencyType.CHANGE_CONNECTION.value:
+                    subprocess.call("./scenario4.sh")
+                
+                else:
+                    print("Command not found, please insert a valid value")
+                
+                time.sleep(5)
             else:
-                print("Command not found, please insert a valid value")
-            
-            time.sleep(5)
+                self.input_num = int(input("\n\nFilter menu:\n \t0 -> Back to default\n \t1-> Slice 1 on\n \t2-> Slice 2 on\n \t3-> Slice 3 on\n \t4-> Slice 4 on\n Enter value: "))
+
+
+                if self.input_num == 0:
+                    subprocess.call("./default.sh")	
+                elif self.input_num == 1:
+                    subprocess.call("./scenario3_slice1.sh")	
+                elif self.input_num == 2:
+                    subprocess.call("./scenario3_slice2.sh")	
+                elif self.input_num == 3:
+                    subprocess.call("./scenario3_slice3.sh")	
+                elif self.input_num == 4:
+                    subprocess.call("./scenario3_slice4.sh")	
+                else:
+                    print("Command not found")
+
+                time.sleep(5)
+
+
+
             
     
