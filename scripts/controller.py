@@ -179,6 +179,8 @@ class TrafficSlicing(app_manager.RyuApp):
     def run_simulation(self):
         time.sleep(5)
 
+        subprocess.run(['python3', 'test.py'])
+
         while True:
             
             if self.in_filter == False:
