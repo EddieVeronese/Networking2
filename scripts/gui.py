@@ -12,6 +12,11 @@ from PIL import Image,ImageTk
 ctk.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
 ctk.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
+scenario3_slice1_on = False
+scenario3_slice2_on = False
+scenario3_slice3_on = False
+scenario3_slice4_on = False
+
 
 class App(ctk.CTk):
 
@@ -31,12 +36,12 @@ class App(ctk.CTk):
         self.canvas.pack(side="right", fill="both", expand=True)
 
         # add riferimento locale
-        image=Image.open('/Users/fed/Desktop/PROGETTO GRANELLI/Networking2/scripts/rete.png')
+        image=Image.open('rete.png')
         img=image.resize((850, 650))
         self.rete_img=ImageTk.PhotoImage(img)
         self.canvas.create_image(5,5,anchor=NW,image=self.rete_img)
 
-        self.arr_lines = [None]*24
+        self.arr_lines = [None]*35
         left_frame =  ctk.CTkFrame(self, width=140, height=800, corner_radius=0)
         left_frame.grid(row=0, column=0, rowspan=3, columnspan=2, sticky="nsw")
         left_frame.grid_rowconfigure((1,2,3,4,5), weight=1)
@@ -48,7 +53,7 @@ class App(ctk.CTk):
         btn_scenarioD = ctk.CTkButton(left_frame, text="default", command=button_scenarioD)
         btn_scenario1 = ctk.CTkButton(left_frame, text="scenario1", command=button_scenario1)
         btn_scenario2 = ctk.CTkButton(left_frame, text="scenario2", command=button_scenario2)
-        btn_scenario3 = ctk.CTkButton(left_frame, text="clear1", command=clear_lines)
+        btn_scenario3 = ctk.CTkButton(left_frame, text="scenario3", command=button_scenario3)
         btn_scenario4 = ctk.CTkButton(left_frame, text="scenario4", command=button_scenario4)
 
         btn_scenarioD.grid(row=1, column=0, padx=20, pady=10)
@@ -57,10 +62,10 @@ class App(ctk.CTk):
         btn_scenario3.grid(row=4, column=0, padx=20, pady=10)
         btn_scenario4.grid(row=5, column=0, padx=20, pady=10)
 
-        self.sub_button1 =ctk.CTkButton(bottom_frame, text="sub1", command=button_scenarioD, state= DISABLED)
-        self.sub_button2 = ctk.CTkButton(bottom_frame, text="sub2", command=button_scenario1, state= DISABLED)
-        self.sub_button3 = ctk.CTkButton(bottom_frame, text="sub3", command=button_scenario2, state= DISABLED)
-        self.sub_button4 = ctk.CTkButton(bottom_frame, text="sub4", command=clear_lines, state= DISABLED)
+        self.sub_button1 = ctk.CTkButton(bottom_frame, text="slice1", command=button_scenario3_slice1, state= DISABLED)
+        self.sub_button2 = ctk.CTkButton(bottom_frame, text="slice2", command=button_scenario3_slice2, state= DISABLED)
+        self.sub_button3 = ctk.CTkButton(bottom_frame, text="slice3", command=button_scenario3_slice3, state= DISABLED)
+        self.sub_button4 = ctk.CTkButton(bottom_frame, text="slice4", command=button_scenario3_slice4, state= DISABLED)
 
         self.sub_button1.grid(row=0, column=0, padx=10, pady=20)
         self.sub_button2.grid(row=0, column=1, padx=10, pady=20)
@@ -69,7 +74,7 @@ class App(ctk.CTk):
        
 
 def button_scenarioD():
-
+    disble_bottom_btn()
     clear_lines()
     ## DEFAULT SCENARIO
 
@@ -105,7 +110,7 @@ def button_scenarioD():
 
 
 def button_scenario1():
-
+    disble_bottom_btn()
     clear_lines()
     ## SCENARIO 1
 
@@ -140,7 +145,7 @@ def button_scenario1():
     app.arr_lines[19] = s3_s6_line = app.canvas.create_line(480,140,570,200, fill="blue", width=5)
 
 def button_scenario2():
-
+    disble_bottom_btn()
     clear_lines()
     ## DEFAULT SCENARIO
 
@@ -179,8 +184,120 @@ def button_scenario2():
     app.arr_lines[23] = s3_s6_line2 = app.canvas.create_line(480,130,570,190, fill="green", width=5)
 
 
-def button_scenario4():
+def button_scenario3():
 
+    clear_lines()
+    enable_bottom_btn()
+
+
+def button_scenario3_slice1():
+    global scenario3_slice1_on
+
+    if scenario3_slice1_on == False:    
+        #lines between hosts and switches
+        app.arr_lines[0] = h1_s1_line = app.canvas.create_line(130,185,200,215, fill="blue", width=5)
+        app.arr_lines[1] = h3_s1_line = app.canvas.create_line(130,285,200,245, fill="blue", width=5)
+        app.arr_lines[2] = h2_s6_line = app.canvas.create_line(730,195,650,225, fill="blue", width=5)
+        app.arr_lines[3] = h4_s6_line = app.canvas.create_line(730,275,650,245, fill="blue", width=5)
+
+        # lines just between switches
+        app.arr_lines[4] = s1_s3_line = app.canvas.create_line(290,195,380,135, fill="blue", width=5)
+        app.arr_lines[5] = s1_s4_line = app.canvas.create_line(290,255,380,325, fill="blue", width=5)
+        app.arr_lines[6] = s4_s6_line = app.canvas.create_line(470,335,550,255, fill="blue", width=5)
+        app.arr_lines[7] =  s3_s6_line = app.canvas.create_line(480,135,570,195, fill="blue", width=5)
+    
+        scenario3_slice1_on = True
+    else:
+        i=0
+        while i<8:
+            app.canvas.delete(app.arr_lines[i])
+            i += 1
+
+        scenario3_slice1_on = False
+
+
+def button_scenario3_slice2():
+    global scenario3_slice2_on
+
+    if scenario3_slice2_on == False:
+        #lines between hosts and switches
+        app.arr_lines[8] = h5_s2_line = app.canvas.create_line(130,445,200,475, fill="yellow", width=5)
+        app.arr_lines[9] = h7_s2_line = app.canvas.create_line(130,535,200,505, fill="yellow", width=5)
+        app.arr_lines[10] = h6_s7_line = app.canvas.create_line(730,445,650,475, fill="yellow", width=5)
+        app.arr_lines[11] = h8_s7_line = app.canvas.create_line(730,535,650,505, fill="yellow", width=5)
+
+        # lines just between switches
+        app.arr_lines[12] = s4_s7_line = app.canvas.create_line(470,395,560,475, fill="yellow", width=5)
+        app.arr_lines[13] = s5_s7_line = app.canvas.create_line(480,595,580,525, fill="yellow", width=5)
+        app.arr_lines[14] = s2_s4_line = app.canvas.create_line(290,465,380,395, fill="yellow", width=5)
+        app.arr_lines[15] = s2_s5_line = app.canvas.create_line(290,525,380,585, fill="yellow", width=5)
+
+        scenario3_slice2_on = True
+    else:
+        i=8
+        while i<16:
+            app.canvas.delete(app.arr_lines[i])
+            i += 1
+
+        scenario3_slice2_on = False
+
+
+def button_scenario3_slice3():
+    global scenario3_slice3_on
+
+    if scenario3_slice3_on == False:
+        #lines between hosts and switches
+        app.arr_lines[16] = h1_s1_line = app.canvas.create_line(130,195,200,225, fill="black", width=5)
+        app.arr_lines[17] = h3_s1_line = app.canvas.create_line(130,295,200,255, fill="black", width=5)
+        app.arr_lines[18] = h2_s6_line = app.canvas.create_line(730,205,650,235, fill="black", width=5)
+        app.arr_lines[19] = h4_s6_line = app.canvas.create_line(730,285,650,255, fill="black", width=5)
+
+
+        # lines just between switches
+        app.arr_lines[20] = s1_s3_line = app.canvas.create_line(290,205,380,145, fill="black", width=5)
+        app.arr_lines[21] = s1_s4_line = app.canvas.create_line(290,264,380,335, fill="black", width=5)
+        app.arr_lines[22] = s4_s6_line = app.canvas.create_line(470,345,550,265, fill="black", width=5)
+        app.arr_lines[23] =  s3_s6_line = app.canvas.create_line(480,145,570,205, fill="black", width=5)
+
+        scenario3_slice3_on = True
+    else:
+        i=16
+        while i<24:
+            app.canvas.delete(app.arr_lines[i])
+            i += 1
+
+        scenario3_slice3_on = False
+
+
+def button_scenario3_slice4():
+    global scenario3_slice4_on
+
+    if scenario3_slice4_on == False:
+        #lines between hosts and switches
+        app.arr_lines[24] = h5_s2_line = app.canvas.create_line(130,455,200,485, fill="red", width=5)
+        app.arr_lines[25] = h7_s2_line = app.canvas.create_line(130,545,200,515, fill="red", width=5)
+        app.arr_lines[26] = h6_s7_line = app.canvas.create_line(730,455,650,485, fill="red", width=5)
+        app.arr_lines[27] = h8_s7_line = app.canvas.create_line(730,545,650,515, fill="red", width=5)
+
+        # lines just between switches
+        app.arr_lines[28] = s4_s7_line = app.canvas.create_line(470,405,560,485, fill="red", width=5)
+        app.arr_lines[29] = s5_s7_line = app.canvas.create_line(480,605,580,535, fill="red", width=5)
+        app.arr_lines[30] = s2_s4_line = app.canvas.create_line(290,475,380,405, fill="red", width=5)
+        app.arr_lines[31] = s2_s5_line = app.canvas.create_line(290,535,380,595, fill="red", width=5)
+
+        scenario3_slice4_on = True
+    else:
+        i=24
+        while i<32:
+            app.canvas.delete(app.arr_lines[i])
+            i += 1
+
+        scenario3_slice4_on = False
+
+
+
+def button_scenario4():
+    disble_bottom_btn()
     clear_lines()
     ## SCENARIO 4
     
