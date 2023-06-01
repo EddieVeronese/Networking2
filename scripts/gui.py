@@ -77,6 +77,7 @@ def button_scenarioD():
     disble_bottom_btn()
     clear_lines()
     ## DEFAULT SCENARIO
+    subprocess.call("./default.sh")	
 
     #lines between hosts and switches
     app.arr_lines[0] = h11_s1_line = app.canvas.create_line(260,130,260,200, fill="", width=5)
@@ -113,6 +114,7 @@ def button_scenario1():
     disble_bottom_btn()
     clear_lines()
     ## SCENARIO 1
+    subprocess.call("./scenario1.sh")
 
     #lines between hosts and switches
     app.arr_lines[0] = h11_s1_line = app.canvas.create_line(260,130,260,200, fill="", width=5)
@@ -147,7 +149,8 @@ def button_scenario1():
 def button_scenario2():
     disble_bottom_btn()
     clear_lines()
-    ## DEFAULT SCENARIO
+    ## SCENARIO 2 
+    subprocess.call("./scenario2.sh")
 
     #lines between hosts and switches
     app.arr_lines[0] = h11_s1_line = app.canvas.create_line(260,130,260,200, fill="purple", width=5)
@@ -300,6 +303,7 @@ def button_scenario4():
     disble_bottom_btn()
     clear_lines()
     ## SCENARIO 4
+    subprocess.call("./scenario4.sh")
     
     #lines between hosts and switches
     app.arr_lines[0] = h11_s1_line = app.canvas.create_line(260,130,260,200, fill="blue", width=5)
