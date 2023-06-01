@@ -13,20 +13,22 @@ The default scenario consists of 7 switches and 12 hosts, 8 of the latter commun
 
 
 
-## Scenario 1 (Perri Perrons)
+## Scenario 1
 In this scenario, we simulate the break of switch 5 and how the network should react to that in order to mantain the QoS. In partcular the traffic is forwarded between switch 3 and 4, with a consequent reduction of the bandwidth to 5 Mbps for the host that pass through switch 3
 ### Pingall
 
-## Scenario 2 (Still Peddi Perrons)
-In this scenario, two hosts are added to the network, let's see how the network can adapt to this increase of traffic while mantaining a good QoS.
+## Scenario 2
+In this scenario, 4 hosts which comunicate in pairs are added to the network, their traffic is forwarded beetween switch 3 and 4, 
 ### Pingall
 
-## Scenario 3 (Francesco il Magnifico)
-In this scenario, there are four possible slices that can be activated:
+## Scenario 3
+In this scenario, there are four possible slices that can be activated simultaneously:
   - slice1 &#8594; enables UDP communications between h1,h2,h3,h4
   - slice2 &#8594; enables UDP communications between h5,h6,h7,h8
   - slice3 &#8594; enables TCP & ICMP communications between h1,h2,h3,h4
   - slice4 &#8594; enables TCP & ICMP communications between h5,h6,h7,h8
+
+### Pingall
 
 Testing UDP connection:
 ```
@@ -41,6 +43,7 @@ h4 iperf -c 10.0.0.3 -t 5 -i 1
 
 ## Scenario 4 (Il più brutto)
 In this scenario we don't know what we are doing, because Federicchio Banani made it (implemented by Eddie of course)
+### Pingall
 
 # How To 
 ## How to Download
@@ -64,7 +67,7 @@ chmod +x file_name.sh
 ``` 
 ryu-manager controller.py 
 ```
-6. Run the topology:   
+6. Run the topology in another terminal:   
 ``` 
 sudo python3 topology.py 
 ```
