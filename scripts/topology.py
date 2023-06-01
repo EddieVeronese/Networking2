@@ -25,7 +25,7 @@ class NetworkSlicingTopo(Topo):
         for i in range(12):
             self.addHost("h%d" % (i + 1), **host_config) 
             
- 
+        
         self.addLink('s1', 's3')
         self.addLink('s1', 's4')      
         self.addLink('s3', 's6')
@@ -48,6 +48,7 @@ class NetworkSlicingTopo(Topo):
         self.addLink('h10', 's6')
         self.addLink('h11', 's1')
         self.addLink('h12', 's6')
+
         
 
 

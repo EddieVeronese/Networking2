@@ -21,3 +21,7 @@ scenario 2 con 4 host in più collegati:
 
 Queste sono le quatità di banda richieste teoriche (se barrata vuol dire che non riesco ad ottenerla e c'è quella sostitutiva):
 ![](images/QoS.jpg)
+
+
+##NB
+import pillow library to run graphics
