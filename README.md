@@ -8,15 +8,18 @@ In this project of Softwarize & Virtualized Networks, we will face some use case
 
 
 ## Default Scenario
+The default scenario consists of 7 switches and 12 hosts, 8 of the latter communicate with each other in pairs, through 4 different slices, while the packets sent by the 4 hosts are dropped as soon as they are forwarded. The connection bandwidth is mantained at 10 Mbps
+### Pingall
+
 
 
 ## Scenario 1 (Perri Perrons)
-In this scenario, we simulate the break of switch 5 and how the network should react to that in order to mantain the QoS.
-
+In this scenario, we simulate the break of switch 5 and how the network should react to that in order to mantain the QoS. In partcular the traffic is forwarded between switch 3 and 4, with a consequent reduction of the bandwidth to 5 Mbps for the host that pass through switch 3
+### Pingall
 
 ## Scenario 2 (Still Peddi Perrons)
 In this scenario, two hosts are added to the network, let's see how the network can adapt to this increase of traffic while mantaining a good QoS.
-
+### Pingall
 
 ## Scenario 3 (Francesco il Magnifico)
 In this scenario, there are four possible slices that can be activated:
