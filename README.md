@@ -4,7 +4,6 @@ Repository for the Networking2 project
 ## Introduction
 In this project of Softwarize & Virtualized Networks, we will face some use cases of slicing. In particular we will face: 2 examples of events that could destabilize the network and how we can garantee a solid QoS, 1 example of network slicing based on the protocol type (UDP, TCP and ICMP) and 1 more example of communication between two areas of the network. All these examples are built over the same network topology (following image) and can be managed by a dedicated GUI.  
 
-***CACCA PUPU***
 
 
 ## Default Scenario
@@ -18,7 +17,7 @@ In this scenario, we simulate the break of switch 5 and how the network should r
 ### Pingall
 
 ## Scenario 2
-In this scenario, 4 hosts which comunicate in pairs are added to the network, their traffic is forwarded beetween switch 3 and 4, 
+In this scenario, 4 hosts which comunicate in pairs are added to the network, their traffic is forwarded beetween switch 3 and 4; since the new hosts take 3 Mbps the bandwidth of the other host connected to switch 1 and 6 is reduced to 7 Mbps
 ### Pingall
 
 ## Scenario 3
@@ -42,7 +41,7 @@ h4 iperf -c 10.0.0.3 -t 5 -i 1
 ```  
 
 ## Scenario 4 (Il più brutto)
-In this scenario we don't know what we are doing, because Federicchio Banani made it (implemented by Eddie of course)
+In this scenario we allow many hosts to communicate through the same queues (h1-h3-h6-h8 and h2-h4-h5-h7); switch 3 and 5 are not used
 ### Pingall
 
 # How To 
