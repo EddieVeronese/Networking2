@@ -45,7 +45,7 @@ h4 iperf -c 10.0.0.3 -t 5 -i 1
 ## Scenario 4 (Il più brutto)
 In this scenario we allow many hosts to communicate through the same queues (h1-h3-h6-h8 and h2-h4-h5-h7); switch 3 and 5 are not used
 ### Pingall
-![](images/pingall_scenario2.png)
+![](images/pingall_scenario4.png)
 
 # How To 
 ## How to Download
