@@ -89,51 +89,9 @@ printf "\n[INFO] Creating links..."
 # CONTROLLO PROT. SOLO IN USCITA, IN ENTRATA SUPER PARTES
 
 # Switch 1
-sudo ovs-ofctl add-flow s1 priority=65500,udp,ip,nw_dst=10.0.0.3,idle_timeout=0,actions=set_queue:123400,output:3
-sudo ovs-ofctl add-flow s1 priority=65500,udp,ip,nw_dst=10.0.0.1,idle_timeout=0,actions=set_queue:123400,output:4
-sudo ovs-ofctl add-flow s1 priority=65500,icmp,ip,nw_dst=10.0.0.3,idle_timeout=0,actions=set_queue:123401,output:3
-sudo ovs-ofctl add-flow s1 priority=65500,icmp,ip,nw_dst=10.0.0.1,idle_timeout=0,actions=set_queue:123401,output:4
-sudo ovs-ofctl add-flow s1 priority=65500,tcp,ip,nw_dst=10.0.0.3,idle_timeout=0,actions=set_queue:123401,output:3
-sudo ovs-ofctl add-flow s1 priority=65500,tcp,ip,nw_dst=10.0.0.1,idle_timeout=0,actions=set_queue:123401,output:4
-
-# udp
-sudo ovs-ofctl add-flow s1 priority=65500,udp,in_port=4,idle_timeout=0,actions=set_queue:123400,output:2
-sudo ovs-ofctl add-flow s1 priority=65500,udp,in_port=3,idle_timeout=0,actions=set_queue:123400,output:2
-#sudo ovs-ofctl add-flow s1 priority=65500,udp,in_port=2,idle_timeout=0,actions=set_queue:123400,output:4,output:3
-
-#icmp
-sudo ovs-ofctl add-flow s1 priority=65500,icmp,in_port=4,idle_timeout=0,actions=set_queue:123401,output:1
-sudo ovs-ofctl add-flow s1 priority=65500,icmp,in_port=3,idle_timeout=0,actions=set_queue:123401,output:1
-#sudo ovs-ofctl add-flow s1 priority=65500,icmp,in_port=1,idle_timeout=0,actions=set_queue:123401,output:4,output:3
-
-#tcp
-sudo ovs-ofctl add-flow s1 priority=65500,tcp,in_port=4,idle_timeout=0,actions=set_queue:123401,output:1
-sudo ovs-ofctl add-flow s1 priority=65500,tcp,in_port=3,idle_timeout=0,actions=set_queue:123401,output:1
-#sudo ovs-ofctl add-flow s1 priority=65500,tcp,in_port=1,idle_timeout=0,actions=set_queue:123401,output:4,output:3
 
 
 # Switch 2
-sudo ovs-ofctl add-flow s2 priority=65500,udp,ip,nw_dst=10.0.0.7,idle_timeout=0,actions=set_queue:567800,output:3
-sudo ovs-ofctl add-flow s2 priority=65500,udp,ip,nw_dst=10.0.0.5,idle_timeout=0,actions=set_queue:567800,output:4
-sudo ovs-ofctl add-flow s2 priority=65500,icmp,ip,nw_dst=10.0.0.7,idle_timeout=0,actions=set_queue:567801,output:3
-sudo ovs-ofctl add-flow s2 priority=65500,icmp,ip,nw_dst=10.0.0.5,idle_timeout=0,actions=set_queue:567801,output:4
-sudo ovs-ofctl add-flow s2 priority=65500,tcp,ip,nw_dst=10.0.0.7,idle_timeout=0,actions=set_queue:567801,output:3
-sudo ovs-ofctl add-flow s2 priority=65500,tcp,ip,nw_dst=10.0.0.5,idle_timeout=0,actions=set_queue:567801,output:4
-
-# udp
-sudo ovs-ofctl add-flow s2 priority=65500,udp,in_port=4,idle_timeout=0,actions=set_queue:567800,output:1
-sudo ovs-ofctl add-flow s2 priority=65500,udp,in_port=3,idle_timeout=0,actions=set_queue:567800,output:1
-#sudo ovs-ofctl add-flow s2 priority=65500,udp,in_port=1,idle_timeout=0,actions=set_queue:567800,output:4,output:3
-
-#icmp
-sudo ovs-ofctl add-flow s2 priority=65500,icmp,in_port=4,idle_timeout=0,actions=set_queue:567801,output:2
-sudo ovs-ofctl add-flow s2 priority=65500,icmp,in_port=3,idle_timeout=0,actions=set_queue:567801,output:2
-#sudo ovs-ofctl add-flow s2 priority=65500,icmp,in_port=2,idle_timeout=0,actions=set_queue:567801,output:4,output:3
-
-#tcp
-sudo ovs-ofctl add-flow s2 priority=65500,tcp,in_port=4,idle_timeout=0,actions=set_queue:567801,output:2
-sudo ovs-ofctl add-flow s2 priority=65500,tcp,in_port=3,idle_timeout=0,actions=set_queue:567801,output:2
-#sudo ovs-ofctl add-flow s2 priority=65500,tcp,in_port=2,idle_timeout=0,actions=set_queue:567801,output:4,output:3
 
 
 
@@ -149,6 +107,7 @@ sudo ovs-ofctl add-flow s4 priority=65500,in_port=2,idle_timeout=0,actions=set_q
 sudo ovs-ofctl add-flow s4 priority=65500,in_port=4,idle_timeout=0,actions=set_queue:5678,output:3
 sudo ovs-ofctl add-flow s4 priority=65500,in_port=3,idle_timeout=0,actions=set_queue:5678,output:4
 sudo ovs-ofctl add-flow s4 priority=65500,tcp,idle_timeout=0,actions=drop
+sudo ovs-ofctl add-flow s4 priority=65500,icmp,idle_timeout=0,actions=drop
 
 
 # Switch 5
@@ -158,50 +117,7 @@ sudo ovs-ofctl add-flow s5 priority=65500,udp,idle_timeout=0,actions=drop
 
 
 # Switch 6
-sudo ovs-ofctl add-flow s6 priority=65500,udp,ip,nw_dst=10.0.0.4,idle_timeout=0,actions=set_queue:123400,output:3
-sudo ovs-ofctl add-flow s6 priority=65500,udp,ip,nw_dst=10.0.0.2,idle_timeout=0,actions=set_queue:123400,output:4
-sudo ovs-ofctl add-flow s6 priority=65500,icmp,ip,nw_dst=10.0.0.4,idle_timeout=0,actions=set_queue:123401,output:3
-sudo ovs-ofctl add-flow s6 priority=65500,icmp,ip,nw_dst=10.0.0.2,idle_timeout=0,actions=set_queue:123401,output:4
-sudo ovs-ofctl add-flow s6 priority=65500,tcp,ip,nw_dst=10.0.0.4,idle_timeout=0,actions=set_queue:123401,output:3
-sudo ovs-ofctl add-flow s6 priority=65500,tcp,ip,nw_dst=10.0.0.2,idle_timeout=0,actions=set_queue:123401,output:4
-
-#udp
-sudo ovs-ofctl add-flow s6 priority=65500,udp,in_port=4,idle_timeout=0,actions=set_queue:123400,output:2
-sudo ovs-ofctl add-flow s6 priority=65500,udp,in_port=3,idle_timeout=0,actions=set_queue:123400,output:2
-#sudo ovs-ofctl add-flow s6 priority=65500,udp,in_port=2,idle_timeout=0,actions=set_queue:123400,output:4,output:3
-
-#icmp
-sudo ovs-ofctl add-flow s6 priority=65500,icmp,in_port=4,idle_timeout=0,actions=set_queue:123401,output:1
-sudo ovs-ofctl add-flow s6 priority=65500,icmp,in_port=3,idle_timeout=0,actions=set_queue:123401,output:1
-#sudo ovs-ofctl add-flow s6 priority=65500,icmp,in_port=1,idle_timeout=0,actions=set_queue:123401,output:4,output:3
-
-#tcp
-sudo ovs-ofctl add-flow s6 priority=65500,tcp,in_port=4,idle_timeout=0,actions=set_queue:123401,output:1
-sudo ovs-ofctl add-flow s6 priority=65500,tcp,in_port=3,idle_timeout=0,actions=set_queue:123401,output:1
-#sudo ovs-ofctl add-flow s6 priority=65500,tcp,in_port=1,idle_timeout=0,actions=set_queue:123401,output:4,output:3
 
 
 # Switch 7
-sudo ovs-ofctl add-flow s7 priority=65500,udp,ip,nw_dst=10.0.0.8,idle_timeout=0,actions=set_queue:567800,output:3
-sudo ovs-ofctl add-flow s7 priority=65500,udp,ip,nw_dst=10.0.0.6,idle_timeout=0,actions=set_queue:567800,output:4
-sudo ovs-ofctl add-flow s7 priority=65500,icmp,ip,nw_dst=10.0.0.8,idle_timeout=0,actions=set_queue:567801,output:3
-sudo ovs-ofctl add-flow s7 priority=65500,icmp,ip,nw_dst=10.0.0.6,idle_timeout=0,actions=set_queue:567801,output:4
-sudo ovs-ofctl add-flow s7 priority=65500,tcp,ip,nw_dst=10.0.0.8,idle_timeout=0,actions=set_queue:567801,output:3
-sudo ovs-ofctl add-flow s7 priority=65500,tcp,ip,nw_dst=10.0.0.6,idle_timeout=0,actions=set_queue:567801,output:4
-
-#udp
-sudo ovs-ofctl add-flow s7 priority=65500,udp,in_port=4,idle_timeout=0,actions=set_queue:567800,output:1
-sudo ovs-ofctl add-flow s7 priority=65500,udp,in_port=3,idle_timeout=0,actions=set_queue:567800,output:1
-#sudo ovs-ofctl add-flow s7 priority=65500,udp,in_port=1,idle_timeout=0,actions=set_queue:567800,output:4,output:3
-
-#icmp
-sudo ovs-ofctl add-flow s7 priority=65500,icmp,in_port=4,idle_timeout=0,actions=set_queue:567801,output:2
-sudo ovs-ofctl add-flow s7 priority=65500,icmp,in_port=3,idle_timeout=0,actions=set_queue:567801,output:2
-#sudo ovs-ofctl add-flow s7 priority=65500,icmp,in_port=2,idle_timeout=0,actions=set_queue:567801,output:4,output:3
-
-#tcp
-sudo ovs-ofctl add-flow s7 priority=65500,tcp,in_port=4,idle_timeout=0,actions=set_queue:567801,output:2
-sudo ovs-ofctl add-flow s7 priority=65500,tcp,in_port=3,idle_timeout=0,actions=set_queue:567801,output:2
-#sudo ovs-ofctl add-flow s7 priority=65500,tcp,in_port=2,idle_timeout=0,actions=set_queue:567801,output:4,output:3
-
 

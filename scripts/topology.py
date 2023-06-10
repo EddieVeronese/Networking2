@@ -72,11 +72,7 @@ if __name__ == "__main__":
     net.build()
     net.start()
 
-    subprocess.call("./scenario3_copy.sh")
-
-    subprocess.call("./scenario3_slice1.sh")
-    subprocess.call("./scenario3_slice2.sh")
-    subprocess.call("./scenario3_slice3.sh")
+    subprocess.call("./default.sh")
 
     
     CLI(net)

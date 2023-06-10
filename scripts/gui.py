@@ -202,6 +202,7 @@ def button_scenario2():
 
 
 def button_scenario3():
+    subprocess.call("./scenario3.sh")
 
     clear_lines()
     enable_bottom_btn()
@@ -213,6 +214,8 @@ def button_scenario3_slice1():
     global scenario3_slice1_on
 
     if scenario3_slice1_on == False:    
+        subprocess.call("./scenario3_slice1.sh")
+
         #lines between hosts and switches
         app.arr_lines[0] = h1_s1_line = app.canvas.create_line(130,185,200,215, fill="blue", width=5)
         app.arr_lines[1] = h3_s1_line = app.canvas.create_line(130,285,200,245, fill="blue", width=5)
@@ -233,12 +236,15 @@ def button_scenario3_slice1():
             i += 1
 
         scenario3_slice1_on = False
+        scenario3_update()
 
 
 def button_scenario3_slice2():
     global scenario3_slice2_on
 
     if scenario3_slice2_on == False:
+        subprocess.call("./scenario3_slice2.sh")
+
         #lines between hosts and switches
         app.arr_lines[8] = h5_s2_line = app.canvas.create_line(130,445,200,475, fill="yellow", width=5)
         app.arr_lines[9] = h7_s2_line = app.canvas.create_line(130,535,200,505, fill="yellow", width=5)
@@ -259,12 +265,15 @@ def button_scenario3_slice2():
             i += 1
 
         scenario3_slice2_on = False
+        scenario3_update()
 
 
 def button_scenario3_slice3():
     global scenario3_slice3_on
 
     if scenario3_slice3_on == False:
+        subprocess.call("./scenario3_slice3.sh")
+
         #lines between hosts and switches
         app.arr_lines[16] = h1_s1_line = app.canvas.create_line(130,195,200,225, fill="black", width=5)
         app.arr_lines[17] = h3_s1_line = app.canvas.create_line(130,295,200,255, fill="black", width=5)
@@ -286,12 +295,15 @@ def button_scenario3_slice3():
             i += 1
 
         scenario3_slice3_on = False
+        scenario3_update()
 
 
 def button_scenario3_slice4():
     global scenario3_slice4_on
 
     if scenario3_slice4_on == False:
+        subprocess.call("./scenario3_slice4.sh")
+
         #lines between hosts and switches
         app.arr_lines[24] = h5_s2_line = app.canvas.create_line(130,455,200,485, fill="red", width=5)
         app.arr_lines[25] = h7_s2_line = app.canvas.create_line(130,545,200,515, fill="red", width=5)
@@ -312,7 +324,20 @@ def button_scenario3_slice4():
             i += 1
 
         scenario3_slice4_on = False
+        scenario3_update()
 
+
+def scenario3_update():
+    subprocess.call("./scenario3.sh")
+
+    if scenario3_slice1_on == True:
+        subprocess.call("./scenario3_slice1.sh")
+    elif scenario3_slice2_on == True:
+        subprocess.call("./scenario3_slice2.sh")
+    elif scenario3_slice3_on == True:
+        subprocess.call("./scenario3_slice3.sh")
+    elif scenario3_slice4_on == True:
+        subprocess.call("./scenario3_slice4.sh")
 
 
 def button_scenario4():
@@ -363,6 +388,16 @@ def clear_lines():
         app.canvas.delete(line)
 
 def disble_bottom_btn():
+    global scenario3_slice1_on
+    scenario3_slice1_on = False
+    global scenario3_slice2_on
+    scenario3_slice2_on = False
+    global scenario3_slice3_on
+    scenario3_slice3_on = False
+    global scenario3_slice4_on
+    scenario3_slice4_on = False
+
+
     app.sub_button1.configure(state= DISABLED)
     app.sub_button2.configure(state= DISABLED)
     app.sub_button3.configure(state= DISABLED)
