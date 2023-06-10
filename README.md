@@ -97,5 +97,8 @@ Queste sono le quatità di banda richieste teoriche (se barrata vuol dire che no
 ![](images/QoS.jpg)
 
 
-##NB
-import pillow library to run graphics
+## How to run graphics
+1. If you're using multipass or some other VM without graphics interface you need to install a grapichal interface followint this guide: https://multipass.run/docs/set-up-a-graphical-interface
+2. make sure to have all the Python3 enviroment installed on your VM
+3. run in the terminal ```pip install customtkinter```
+4. run in the terminal ```pip install Pillow```
