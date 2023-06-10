@@ -42,7 +42,7 @@ h3 iperf -s &
 h4 iperf -c 10.0.0.3 -t 5 -i 1
 ```  
 
-## Scenario 4 (Il più brutto)
+## Scenario 4
 In this scenario we allow many hosts to communicate through the same queues (h1-h3-h6-h8 and h2-h4-h5-h7); switch 3 and 5 are not used
 ### Pingall
 ![](images/pingall_scenario4.png)
@@ -102,3 +102,4 @@ Queste sono le quatità di banda richieste teoriche (se barrata vuol dire che no
 2. make sure to have all the Python3 enviroment installed on your VM
 3. run in the terminal ```pip install customtkinter```
 4. run in the terminal ```pip install Pillow```
+5. run in the terminal ```sudo apt-get install python3-pil python3-pil.imagetk```
