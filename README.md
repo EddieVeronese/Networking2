@@ -34,7 +34,7 @@ In this scenario, there are four possible slices that can be activated simultane
   - slice4 &#8594; enables TCP & ICMP communications between h5,h6,h7,h8
 
 ### Pingall
-
+![](images/pingall_scenario3.png)
 Testing UDP connection:
 ```
 h1 iperf -s -u &
