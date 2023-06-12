@@ -187,13 +187,13 @@ class TrafficSlicing(app_manager.RyuApp):
                 self.emergency_type = input("\n\nTypes of emergencies:\n \t0 -> No Emergency\n \t1-> Switch Broken\n \t2-> New Hosts\n \t3-> Filter\n \t4-> Chage connection\n Enter value: ")
 
                 if int(self.emergency_type) == EmergencyType.NONE.value:
-                    subprocess.call("./default.sh")	
+                    
 
                 elif int(self.emergency_type) == EmergencyType.SWITCH_BROKEN.value:
-                    subprocess.call("./scenario1.sh")
+                    
         
                 elif int(self.emergency_type) == EmergencyType.NEW_HOSTS.value:
-                    subprocess.call("./scenario2.sh")
+                    
                 
                 elif int(self.emergency_type) == EmergencyType.FILTER.value:
                     subprocess.call("./scenario3_copy.sh")
@@ -201,7 +201,7 @@ class TrafficSlicing(app_manager.RyuApp):
                     self.in_filter = True;
 
                 elif int(self.emergency_type) == EmergencyType.CHANGE_CONNECTION.value:
-                    subprocess.call("./scenario4.sh")
+                    
                 
                 else:
                     print("Command not found, please insert a valid value")
