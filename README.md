@@ -26,7 +26,7 @@ In this scenario, we simulate the break of switch 5 and how the network should r
 
 ## Scenario 2
 ![](images/image_scenario2.jpg)
-In this scenario, 4 hosts which comunicate in pairs are added to the network, their traffic is forwarded beetween switch 3 and 4; since the new hosts take 3 Mbps the bandwidth of the other host connected to switch 1 and 6 is reduced to 70 Mbps
+In this scenario, 4 hosts which comunicate in pairs are added to the network, their traffic is forwarded beetween switch 3 and 4; since the new hosts take 30 Mbps the bandwidth of the other host connected to switch 1 and 6 is reduced to 70 Mbps
 ### Pingall
 ![](images/pingall_scenario2.png)
 ### Bandwith
