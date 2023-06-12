@@ -175,7 +175,7 @@ class TrafficSlicing(app_manager.RyuApp):
     
         # Function that automates the alternation between Emergency and Non-Emergency Scenario                
     def run_simulation(self):
-        time.sleep(3)
+        time.sleep(2)
 
         subprocess.run(['python3', 'gui.py'])
 
