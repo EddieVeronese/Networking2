@@ -7,22 +7,26 @@ In this project of Softwarize & Virtualized Networks, we will face some use case
 
 
 ## Default Scenario
+![](images/image_defaultscenario.jpg)
 The default scenario consists of 7 switches and 12 hosts, 8 of the latter communicate with each other in pairs, through 4 different slices, while the packets sent by the 4 hosts are dropped as soon as they are forwarded. The connection bandwidth is mantained at 10 Mbps
 ### Pingall
 ![](images/pingall_default_scenario.png)
 
 
 ## Scenario 1
+![](images/image_scenario1.jpg)
 In this scenario, we simulate the break of switch 5 and how the network should react to that in order to mantain the QoS. In partcular the traffic is forwarded between switch 3 and 4, with a consequent reduction of the bandwidth to 5 Mbps for the host that pass through switch 3
 ### Pingall
 ![](images/pingall_default_scenario.png)
 
 ## Scenario 2
+![](images/image_scenario2.jpg)
 In this scenario, 4 hosts which comunicate in pairs are added to the network, their traffic is forwarded beetween switch 3 and 4; since the new hosts take 3 Mbps the bandwidth of the other host connected to switch 1 and 6 is reduced to 7 Mbps
 ### Pingall
 ![](images/pingall_scenario2.png)
 
 ## Scenario 3
+![](images/image_scenario3.jpg)
 In this scenario, there are four possible slices that can be activated simultaneously:
   - slice1 &#8594; enables UDP communications between h1,h2,h3,h4
   - slice2 &#8594; enables UDP communications between h5,h6,h7,h8
@@ -43,6 +47,7 @@ h4 iperf -c 10.0.0.3 -t 5 -i 1
 ```  
 
 ## Scenario 4
+![](images/image_scenario4.jpg)
 In this scenario we allow many hosts to communicate through the same queues (h1-h3-h6-h8 and h2-h4-h5-h7); switch 3 and 5 are not used
 ### Pingall
 ![](images/pingall_scenario4.png)
