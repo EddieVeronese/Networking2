@@ -1,6 +1,8 @@
 # Networking2
 Repository for the Networking2 project
 
+Link presentazione : https://www.canva.com/design/DAFkae-cjBQ/mSbPlKqi4jkcJ5jT_Agb2w/view?utm_content=DAFkae-cjBQ&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink
+
 ## Introduction
 In this project of Softwarize & Virtualized Networks, we will face some use cases of slicing. In particular we will face: 2 examples of events that could destabilize the network and how we can garantee a solid QoS, 1 example of network slicing based on the protocol type (UDP, TCP and ICMP) and 1 more example of communication between two areas of the network. All these examples are built over the same network topology (following image) and can be managed by a dedicated GUI.  
 
