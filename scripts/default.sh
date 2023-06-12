@@ -84,7 +84,7 @@ queues:56=@1q queues:78=@2q -- \
 
 
 # Creating links
-printf "\n[INFO] Creating links..."
+printf "\n[INFO] Creating links default scenario..."
 
 # Switch 1
 sudo ovs-ofctl add-flow s1 ip,priority=65500,in_port=4,idle_timeout=0,actions=set_queue:12,output:1

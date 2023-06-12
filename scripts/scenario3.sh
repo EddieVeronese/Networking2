@@ -84,9 +84,7 @@ queues:567800=@1q queues:567801=@2q -- \
 
 
 # Creating links with new_src
-printf "\n[INFO] Creating links..."
-
-# CONTROLLO PROT. SOLO IN USCITA, IN ENTRATA SUPER PARTES
+printf "\n[INFO] Creating links scenario 3..."
 
 # Switch 1
 

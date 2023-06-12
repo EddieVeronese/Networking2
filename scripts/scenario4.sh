@@ -57,7 +57,7 @@ queues:1368=@1q -- \
 
 
 # Creating links
-printf "\n[INFO] Creating links di Fede gg easy..."
+printf "\n[INFO] Creating links scenario 4..."
 
 # Switch 1 ok
 sudo ovs-ofctl add-flow s1 ip,priority=65500,nw_src=10.0.0.1,,idle_timeout=0,actions=set_queue:1368,output:2,output:3

@@ -160,8 +160,6 @@ class TrafficSlicing(app_manager.RyuApp):
         dst = eth.dst
 
         dpid = datapath.id
-
-        print(f"Eccolo {dst}") 
         
         if dst in self.mac_to_port[dpid]: 
 
@@ -177,9 +175,12 @@ class TrafficSlicing(app_manager.RyuApp):
     
         # Function that automates the alternation between Emergency and Non-Emergency Scenario                
     def run_simulation(self):
-        time.sleep(5)
+        time.sleep(3)
 
         subprocess.run(['python3', 'gui.py'])
+
+        """
+        USED ONLY FOR TESTING WITHOUT GUI
 
         while True:
             
@@ -196,7 +197,7 @@ class TrafficSlicing(app_manager.RyuApp):
                     
                 
                 elif int(self.emergency_type) == EmergencyType.FILTER.value:
-                    subprocess.call("./scenario3_copy.sh")
+                    subprocess.call("./scenario3.sh")
 
                     self.in_filter = True;
 
@@ -207,6 +208,7 @@ class TrafficSlicing(app_manager.RyuApp):
                     print("Command not found, please insert a valid value")
                 
                 time.sleep(5)
+
             else:
                 self.input_num = int(input("\n\nFilter menu:\n \t0 -> Back to default\n \t1-> Slice 1 on\n \t2-> Slice 2 on\n \t3-> Slice 3 on\n \t4-> Slice 4 on\n Enter value: "))
 
@@ -226,7 +228,7 @@ class TrafficSlicing(app_manager.RyuApp):
 
                 time.sleep(5)
 
-
+        """
 
             
     

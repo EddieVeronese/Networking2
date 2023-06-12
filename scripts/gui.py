@@ -38,7 +38,7 @@ class App(ctk.CTk):
         self.canvas.pack(side="right", fill="both", expand=True)
 
         # add riferimento locale
-        image=Image.open('rete.png')
+        image=Image.open('../images/rete.png')
         img=image.resize((850, 650))
         self.rete_img=ImageTk.PhotoImage(img)
         self.canvas.create_image(5,5,anchor=NW,image=self.rete_img)

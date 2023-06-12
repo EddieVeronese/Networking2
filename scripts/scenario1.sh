@@ -4,7 +4,6 @@ do
     sudo ovs-ofctl del-flows $bridge
 done
 
-printf "Ops, Francisco ha rotto uno switch\n"
 
 # Switch 1
 printf "Switch 1\n"
@@ -74,7 +73,7 @@ queues:56=@1q queues:78=@2q -- \
 
 
 # Creating links with new_src
-printf "\n[INFO] Creating links..."
+printf "\n[INFO] Creating links scenario 1..."
 
 # Switch 1 ok
 sudo ovs-ofctl add-flow s1 ip,priority=65500,nw_src=10.0.0.1,idle_timeout=0,actions=set_queue:12,output:1
