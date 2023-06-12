@@ -14,7 +14,7 @@ The default scenario consists of 7 switches and 12 hosts, 8 of the latter commun
 ### Pingall
 ![](images/pingall_default_scenario.png)
 ### Bandwith
-![](images/n2-default.png)
+![](images/n2-default)
 
 ## Scenario 1
 ![](images/image_scenario1.jpg)
@@ -22,7 +22,7 @@ In this scenario, we simulate the break of switch 5 and how the network should r
 ### Pingall
 ![](images/pingall_default_scenario.png)
 ### Bandwith
-![](images/default.png)
+![](images/n2-scenario1)
 
 ## Scenario 2
 ![](images/image_scenario2.jpg)
