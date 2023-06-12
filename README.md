@@ -13,19 +13,25 @@ In this project of Softwarize & Virtualized Networks, we will face some use case
 The default scenario consists of 7 switches and 12 hosts, 8 of the latter communicate with each other in pairs, through 4 different slices, while the packets sent by the 4 hosts are dropped as soon as they are forwarded. The connection bandwidth is mantained at 100 Mbps
 ### Pingall
 ![](images/pingall_default_scenario.png)
-
+### Bandwith
+![](images/n2-default.png)
 
 ## Scenario 1
 ![](images/image_scenario1.jpg)
 In this scenario, we simulate the break of switch 5 and how the network should react to that in order to mantain the QoS. In partcular the traffic is forwarded between switch 3 and 4, with a consequent reduction of the bandwidth to 50 Mbps for the host that pass through switch 3
 ### Pingall
 ![](images/pingall_default_scenario.png)
+### Bandwith
+![](images/default.png)
 
 ## Scenario 2
 ![](images/image_scenario2.jpg)
 In this scenario, 4 hosts which comunicate in pairs are added to the network, their traffic is forwarded beetween switch 3 and 4; since the new hosts take 3 Mbps the bandwidth of the other host connected to switch 1 and 6 is reduced to 70 Mbps
 ### Pingall
 ![](images/pingall_scenario2.png)
+### Bandwith
+![](images/n2-scenario2)
+![](images/n2-scenarioh910)
 
 ## Scenario 3
 ![](images/image_scenario3.jpg)
