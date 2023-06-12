@@ -31,7 +31,7 @@ In this scenario, 4 hosts which comunicate in pairs are added to the network, th
 ![](images/pingall_scenario2.png)
 ### Bandwith
 ![](images/n2-scenario2)
-![](images/n2-scenarioh910)
+![](images/n2-scenario2-h910)
 
 ## Scenario 3
 ![](images/image_scenario3.jpg)
