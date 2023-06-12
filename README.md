@@ -62,6 +62,12 @@ In this scenario we allow many hosts to communicate through the same queues (h1-
 ``` 
 git clone ... 
 ```
+## GUI reqirements
+1. If you're using multipass or some other VM without graphics interface you need to install a grapichal interface followint this guide: https://multipass.run/docs/set-up-a-graphical-interface
+2. make sure to have all the Python3 enviroment installed on your VM
+3. run in the terminal ```pip install customtkinter```
+4. run in the terminal ```pip install Pillow```
+5. run in the terminal ```sudo apt-get install python3-pil python3-pil.imagetk```
 
 ## How to Run
 1. Open a comnetsemu portale or similar
@@ -78,7 +84,7 @@ ryu-manager controller.py
 ``` 
 sudo python3 topology.py 
 ```
-8. Use the GUI to interact with the simulated network
+7. Use the GUI to interact with the simulated network and change scenario
 
 ## How to Stop
 1. Stop the Ryu controller
@@ -88,23 +94,5 @@ mininet> exit
 $ sudo mn -c
 ```
 
-
-Scenario di default:
-![](images/default.jpg)
-
-Scenario 1 con switch 5 rotto:
-![](images/scenario1.jpg)
-
-scenario 2 con 4 host in più collegati:
-![](images/scenario2.jpg)
-
 Queste sono le quatità di banda richieste teoriche (se barrata vuol dire che non riesco ad ottenerla e c'è quella sostitutiva):
 ![](images/QoS.jpg)
-
-
-## How to run graphics
-1. If you're using multipass or some other VM without graphics interface you need to install a grapichal interface followint this guide: https://multipass.run/docs/set-up-a-graphical-interface
-2. make sure to have all the Python3 enviroment installed on your VM
-3. run in the terminal ```pip install customtkinter```
-4. run in the terminal ```pip install Pillow```
-5. run in the terminal ```sudo apt-get install python3-pil python3-pil.imagetk```
