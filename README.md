@@ -85,15 +85,15 @@ git clone ...
 ``` 
 chmod +x file_name.sh 
 ```
-5. Run the controller:  
+4. Run the controller:  
 ``` 
 ryu-manager controller.py 
 ```
-6. Run the topology in another terminal:   
+5. Run the topology in another terminal:   
 ``` 
 sudo python3 topology.py 
 ```
-7. Use the GUI to interact with the simulated network and change scenario
+6. Use the GUI to interact with the simulated network and change scenario
 
 ## How to Stop
 1. Stop the Ryu controller
